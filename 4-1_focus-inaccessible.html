@@ -6,14 +6,34 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Accessibility</title>
     <link href="assets/css/main.css" media="all" rel="stylesheet" type="text/css" />
+    <style>
+    	a,
+    	a:hover,
+    	a:focus,
+    	a:active {
+    		color: inherit;
+    		text-decoration: underline;
+    	}
     
+    	/* Style changes only applied to :hover and :active */
+    	a:hover,
+    	a:active {
+    		color: #a4c400;
+    		text-decoration: none;
+    	}
+    
+    	/* Focus outline removed */
+    	*:focus {
+    		outline: none !important;
+    	}
+    </style>
   </head>
   <body>
     <header role="banner">
-      <h1><span>Demo 3.2:</span> Accessible focus handling</h1>
+      <h1><span>Demo 4.1:</span> Inaccessible focus handling</h1>
     </header>
     <main role="main">
-      <h2>Navigate through the following links using the tab key.</h2>
+      <h2>Navigate through the following links using the tab key. Good luck.</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in enim at massa viverra pellentesque. Donec egestas nulla non nibh sagittis adipiscing. Aenean magna massa, porta ut venenatis id, posuere quis dolor. Nullam et diam non tellus fringilla volutpat. Donec nec libero enim, id aliquet felis. Sed sollicitudin laoreet massa, ut dignissim magna elementum et. Nulla malesuada libero vitae tortor rutrum eget commodo ipsum luctus. Quisque lacus metus, vehicula vel volutpat vitae, commodo in dui. Vivamus et
         <a href="#">velit</a>
@@ -28,24 +48,17 @@
       </p>
     </main>
     <hr>
-    <a class="js-toggle" href="#fixes">Show fixes and notes</a>
-    <div class="fixes is-invisible js-details" id="fixes">
-      <h2>Fixes</h2>
+    <a class="js-toggle" href="#issues">Show issues</a>
+    <div class="issues is-invisible js-details" id="issues">
+      <h2>Issues</h2>
       <ul>
-        <li>Native focus outline preserved (<a href="http://www.w3.org/TR/2012/NOTE-WCAG20-TECHS-20120103/G165">G165</a>) and :hover styles applied to :focus, too.</li>
+        <li>"outline:none" used to remove focus indication. No style changes on focus.</li>
       </ul>
-      <div class="notes">
-        <h2>Notes</h2>
-        <ul>
-          <li>Corresponding success criterion: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-navigation-mechanisms-focus-visible">2.4.7 Focus Visible</a>.</li>
-          <li>Alternative approaches regarding outlines: <a href="http://24ways.org/2009/dont-lose-your-focus/">Don't Lose Your :focus</a> by Patrick H. Lauke and <a href="http://blog.paciellogroup.com/2012/04/how-to-remove-css-outlines-in-an-accessible-manner/">How to remove CSS outlines in an accessible manner?</a> by Steve Faulkner.</li>
-        </ul>
-      </div>
     </div>
     <hr>
     <nav role="navigation">
-      <a class="next" href="4-1_button-inaccessible.html">Forward to "<span>Demo 4.1:</span> Inaccessible fake buttons" »</a>
-      <a class="prev" href="3-1_focus-inaccessible.html">« Back to "<span>Demo 3.1:</span> Inaccessible focus handling"</a>
+      <a class="next" href="4-2_focus-accessible.html">Forward to "<span>Demo 4.2:</span> Accessible focus handling" »</a>
+      <a class="prev" href="3-2_structure-accessible.html">« Back to "<span>Demo 3.2:</span> Accessible content structure"</a>
       <a class="index" href="index.html">Index</a>
     </nav>
     <script src="assets/js/main.js" type="text/javascript"></script>
