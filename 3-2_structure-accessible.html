@@ -6,7 +6,27 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Accessibility</title>
     <link href="assets/css/main.css" media="all" rel="stylesheet" type="text/css" />
-    
+    <style>
+      .visuallyhidden {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+      .visuallyhidden.focusable:focus,
+      .visuallyhidden.focusable:active {
+        clip: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        position: static;
+        width: auto;
+      }
+    </style>
   </head>
   <body>
     <a href="#main" class="visuallyhidden focusable">Skip navigation</a>
