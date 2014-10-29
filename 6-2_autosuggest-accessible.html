@@ -37,15 +37,16 @@
     <div class="fixes is-invisible js-details" id="fixes">
       <h2>Fixes</h2>
       <ul>
-        <li></li>
-      </ul>
-      <div class="notes">
-        <h2>Notes</h2>
-        <ul>
           <li>Suggestions are keyboard-accessible.</li>
           <li>ARIA live region tells the user about the suggestions.</li>
           <li>ARIA roles <code>listbox</code> (container) and <code>option</code> (suggestions) added.</li>
           <li>ARIA state <code>aria-expanded</code> toggled when suggestions are shown/hidden.</li>
+      </ul>
+      <div class="notes">
+        <h2>Notes</h2>
+        <ul>
+          <li><code>listbox</code> and <code>option</code> roles as well as <code>aria-expanded</code> state seem to be ignored in VoiceOver with any browser.</li>
+          <li><code>aria-live</code> seems to be ignored in NVDA with Chrome but works with Firefox.</li>
         </ul>
       </div>
     </div>
