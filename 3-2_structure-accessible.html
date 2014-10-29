@@ -7,7 +7,7 @@
     <title>Accessibility</title>
     <link href="assets/css/main.css" media="all" rel="stylesheet" type="text/css" />
     <style>
-      .visuallyhidden {
+      .skiplink {
         border: 0;
         clip: rect(0 0 0 0);
         height: 1px;
@@ -17,13 +17,12 @@
         position: absolute;
         width: 1px;
       }
-      .visuallyhidden.focusable:focus,
-      .visuallyhidden.focusable:active {
+      .skiplink:focus,
+      .skiplink:active {
         clip: auto;
         height: auto;
         margin: 0;
         overflow: visible;
-        position: static;
         width: auto;
       }
     </style>
@@ -33,9 +32,9 @@
       <h1><span>Demo 3.2:</span> Accessible content structure</h1>
 
       <hr>
-      <a href="#main" class="visuallyhidden focusable">Skip navigation</a>
+      <a href="#main" class="skiplink">Skip navigation</a>
       
-      <p>Examplary navgation</p>
+      <p>Examplary navigation</p>
       <ul>
         <li><a href="#">Elektrotechnik (E)</a></li>
         <li><a href="#">Erneuerbare Energien und Umwelttechnik (EEU)</a></li>
@@ -94,7 +93,7 @@
       ;(function() {
         'use strict';
       
-        document.querySelector('.visuallyhidden.focusable').addEventListener('click', function(event) {
+        document.querySelector('.skiplink').addEventListener('click', function(event) {
           var href = event.target.getAttribute('href'),
               target = document.querySelector(href);
           
