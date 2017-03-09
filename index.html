@@ -107,7 +107,7 @@
         </ul>
       </section>
       <section>
-        <h3>5. Buttons</h3>
+        <h3>5. Buttons & links</h3>
         <ul>
           <li>
             <a href="5-1_button-inaccessible.html"><span>Demo 5.1:</span> Inaccessible fake buttons</a>
@@ -120,6 +120,19 @@
             <ul>
               <li>Fake button supplied with <code>role="button"</code> attribute (in addition to <code>tabindex="0"</code>) and <code>keydown</code> listener for enter and space keys (<a href="http://www.w3.org/WAI/GL/wiki/Making_actions_keyboard_accessible_by_using_keyboard_event_handlers_with_WAI-ARIA_controls#Example_1:_Using_Space_to_activate_a_button">new technique</a>).</li>
               <li>Native <code>button</code> element used.</li>
+            </ul>
+          </li>
+          <li>
+            <a href="5-3_link-inaccessible.html"><span>Demo 5.3:</span> Inaccessible icon link</a>
+            <ul>
+              <li>No text alternative to icon</li>
+            </ul>
+          </li>
+          <li>
+            <a href="5-4_link-accessible.html"><span>Demo 5.4:</span> Accessible icon link</a>
+            <ul>
+              <li>Visually hidden text alternative provided</li>
+              <li>Icon element hidden reliably from screenreaders using a custom element with <em>aria-hidden="true" role="presentation"</em></li>
             </ul>
           </li>
         </ul>
