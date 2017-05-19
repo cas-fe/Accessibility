@@ -184,7 +184,7 @@
             var val = event.target.value;
 
             // Submit Ajax request (unless enter or esc keys were used)
-            if (event.keyCode !== 13 && event.keyCode !== 27 && val.length > 1) {
+            if (event.keyCode !== 13 && event.keyCode !== 27 && val.length > 0) {
               submitRequest(val, event.target, container, status);
             }
 
