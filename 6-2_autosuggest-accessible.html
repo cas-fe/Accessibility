@@ -71,7 +71,7 @@
             if (response && response.suggestions) {
               // Filter list since we only have a static server
               suggestions = response.suggestions.filter(function(suggestion) {
-                return suggestion.match(query);
+                return suggestion.match(new RegExp(query, 'i'));
               });
 
               showSuggestions(suggestions, field, container, status);
