@@ -164,7 +164,8 @@
 
           // Add ARIA live region to tell the user something happened
           status.classList.add('status');
-          status.setAttribute('aria-live', 'polite');
+          status.setAttribute('role', 'status');
+          status.setAttribute('aria-live', 'assertive');
           field.parentNode.insertBefore(status, container.nextSibling);
         
           field.addEventListener('keyup', function(event) {
