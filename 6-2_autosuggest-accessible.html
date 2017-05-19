@@ -65,14 +65,20 @@
           var request = new XMLHttpRequest();
 
           request.onload = function() {
-            var response = JSON.parse(request.responseText);
+            var response = JSON.parse(request.responseText),
+              suggestions;
 
             if (response && response.suggestions) {
-              showSuggestions(response.suggestions, field, container, status);
+              // Filter list since we only have a static server
+              suggestions = response.suggestions.filter(function(suggestion) {
+                return suggestion.match(query);
+              });
+
+              showSuggestions(suggestions, field, container, status);
             }
           };
 
-          request.open('get', 'data/suggestions.json', true);
+          request.open('get', 'data/suggestions.json?' + query, true);
           request.send();
         }
 
