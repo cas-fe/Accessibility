@@ -135,7 +135,11 @@
           });
 
           status.innerHTML = '';
-          status.innerHTML = suggestions.length + ' suggestions found. Use arrow keys to navigate.';
+          status.innerHTML = suggestions.length + ' suggestions found.'
+
+          if (suggestions.length) {
+            status.innerHTML += ' Use arrow keys to navigate.';
+          }
 
           field.setAttribute('aria-expanded', 'true');
 
