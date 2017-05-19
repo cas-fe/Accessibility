@@ -119,12 +119,16 @@
 
                 if (index < suggestions.length - 1) {
                   items[index + 1].focus();
+                } else {
+                  field.focus();
                 }
               } else if (event.keyCode === 38) {
                 event.preventDefault();
 
                 if (index > 0) {
                   items[index - 1].focus();
+                } else {
+                  field.focus();
                 }
               } else if (event.keyCode === 13) {
                 setValue(field, container, text);
