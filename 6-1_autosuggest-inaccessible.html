@@ -50,6 +50,11 @@
             var response = JSON.parse(request.responseText);
 
             if (response && response.suggestions) {
+              // Filter list since we only have a static server
+              suggestions = response.suggestions.filter(function(suggestion) {
+                return suggestion.match(new RegExp(query, 'i'));
+              });
+              
               showSuggestions(response.suggestions, field, container);
             }
           };
