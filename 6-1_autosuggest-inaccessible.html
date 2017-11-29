@@ -47,7 +47,8 @@
           var request = new XMLHttpRequest();
 
           request.onload = function() {
-            var response = JSON.parse(request.responseText);
+            var response = JSON.parse(request.responseText),
+              suggestions;
 
             if (response && response.suggestions) {
               // Filter list since we only have a static server
