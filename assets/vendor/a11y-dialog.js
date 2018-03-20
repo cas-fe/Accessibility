@@ -103,7 +103,10 @@
     // it later, then set the focus to the first focusable child of the dialog
     // element
     focusedBeforeDialog = document.activeElement;
-    setFocusToFirstItem(this.node);
+
+    setTimeout(function() {
+    	setFocusToFirstItem(this.node);
+    }, 100);
 
     // Bind a focus event listener to the body element to make sure the focus
     // stays trapped inside the dialog while open, and start listening for some
