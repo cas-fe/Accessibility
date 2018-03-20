@@ -138,7 +138,7 @@
         </ul>
       </section>
       <section>
-        <h3>6. Auto-suggest</h3>
+        <h3>6. ARIA</h3>
         <ul>
           <li>
             <a href="6-1_autosuggest-inaccessible.html"><span>Demo 6.1:</span> Inaccessible auto-suggest</a>
@@ -154,6 +154,20 @@
               <li>ARIA live region tells the user about the suggestions.</li>
               <li>ARIA roles <code>listbox</code> (container) and <code>option</code> (suggestions) added.</li>
               <li>ARIA state <code>aria-expanded</code> toggled when suggestions are shown/hidden.</li>
+            </ul>
+          </li>
+          <li>
+            <a href="6-3_modal-inaccessible.html"><span>Demo 6.3:</span> Inaccessible modal</a>
+            <ul>
+              <li>The user is not informed about the opened modal.</li>
+              <li>Interaction with elements outside of it is still possible.</li>
+            </ul>
+          </li>
+          <li>
+            <a href="6-4_modal-accessible.html"><span>Demo 6.4:</span> Accessible modal</a>
+            <ul>
+              <li>Focus is trapped within modal (via some <a href="https://github.com/edenspiekermann/a11y-dialog/blob/master/a11y-dialog.js#L355-L372">JavaScript</a> intercepting tabbing), main page content is hidden. The user can only interact with the modal.</li>
+              <li>ARIA role <code>dialog</code> is used to inform the user about the nature of this component.</li>
             </ul>
           </li>
         </ul>
