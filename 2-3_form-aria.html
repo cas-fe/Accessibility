@@ -129,6 +129,8 @@
       
       	// Loop through fields on submit and toggle error message
       	form.addEventListener('submit', function(event) {
+          fieldFocused = false;
+          
       		var validationFailed = false;
       
       		fields.forEach(function(field) {
