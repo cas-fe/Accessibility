@@ -139,13 +139,6 @@
             items.push(item);
           });
 
-          status.innerHTML = '';
-          status.innerHTML = suggestions.length + ' suggestions found.'
-
-          if (suggestions.length) {
-            status.innerHTML += ' Use arrow keys to navigate.';
-          }
-
           field.setAttribute('aria-expanded', 'true');
 
           // (Re)bind EventListener
@@ -155,6 +148,16 @@
 
           field._arrowKeyEventListener = arrowKeyEventListener.bind(null, items);
           field.addEventListener('keydown', field._arrowKeyEventListener, false);
+
+          // Slightly delay status update
+          setTimeout(function() {
+            status.innerHTML = '';
+            status.innerHTML = suggestions.length + ' suggestions found.'
+
+            if (suggestions.length) {
+              status.innerHTML += ' Use arrow keys to navigate.';
+            }
+          }, 1000);
         }
 
         function setValue(field, container, value) {
