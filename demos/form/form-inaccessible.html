@@ -6,6 +6,8 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Accessibility</title>
     <link href="../../assets/css/main.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../../assets/vendor/vuetify.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet" />
   </head>
   <body>
     <header role="banner">
@@ -24,9 +26,40 @@
           <br />
           <input class="js_required" name="email" type="email" />
         </p>
-        <p>
-          <input name="tel" placeholder="Telephone" type="tel" />
-        </p>
+        <div data-app class="v-application">
+          <div>
+            <p>
+              <v-select :items="['Foo', 'Bar', 'Fizz', 'Buzz']" label="Type"></v-select>
+            </p>
+            <p>
+              <v-menu
+                ref="menu"
+                v-model="menu"
+                :close-on-content-click="false"
+                :return-value.sync="date"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="date"
+                    label="Date"
+                    prepend-icon="mdi-calendar"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="date" no-title scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn text color="primary" @click="menu = false"> Cancel </v-btn>
+                  <v-btn text color="primary" @click="$refs.menu.save(date)"> OK </v-btn>
+                </v-date-picker>
+              </v-menu>
+            </p>
+          </div>
+        </div>
         <p>
           <input type="submit" value="Submit" />
         </p>
@@ -39,6 +72,7 @@
       <ul>
         <li><code>label</code> tags omitted or hidden.</li>
         <li>Required fields not properly marked.</li>
+        <li>Inaccesible select and datepicker widgets from UI framework.</li>
         <li>Unnoticed insertion of error message.</li>
         <li>No connection of error messages to invalid fields.</li>
       </ul>
@@ -49,6 +83,8 @@
       <a class="prev" href="/demos/table/table-accessible.html">« Back to "Accessible table"</a>
       <a class="index" href="/index.html">Index</a>
     </nav>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="../../assets/js/main.js" type="text/javascript"></script>
     <script>
       (function () {
@@ -110,6 +146,16 @@
           },
           false
         );
+
+        // Init Vuetify
+        new Vue({
+          el: form,
+          vuetify: new Vuetify(),
+          data: () => ({
+            date: new Date().toISOString().substr(0, 10),
+            menu: false,
+          }),
+        });
       })();
     </script>
   </body>
