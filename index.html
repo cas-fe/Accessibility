@@ -13,17 +13,17 @@
     </header>
     <main role="main">
       <section>
-        <h3>1. Tables</h3>
+        <h3>Tables</h3>
         <ul>
           <li>
-            <a href="1-1_table-inaccessible.html"><span>Demo 1.1:</span> Inaccessible table</a>
+            <a href="/demos/table/table-inaccessible.html">Inaccessible table</a>
             <ul>
               <li>Cells not connected to their headers.</li>
               <li>Caption not connected to table.</li>
             </ul>
           </li>
           <li>
-            <a href="1-2_table-accessible.html"><span>Demo 1.2:</span> Accessible table</a>
+            <a href="/demos/table/table-accessible.html">Accessible table</a>
             <ul>
               <li>
                 <code>th</code> with <code>scope</code> attribute used (<a
@@ -37,10 +37,10 @@
         </ul>
       </section>
       <section>
-        <h3>2. Form markup and validation</h3>
+        <h3>Form markup and validation</h3>
         <ul>
           <li>
-            <a href="2-1_form-inaccessible.html"><span>Demo 2.1:</span> Inaccessible form</a>
+            <a href="/demos/form/form-inaccessible.html">Inaccessible form</a>
             <ul>
               <li><code>label</code> tags omitted or hidden.</li>
               <li>Required fields not properly marked.</li>
@@ -49,7 +49,7 @@
             </ul>
           </li>
           <li>
-            <a href="2-2_form-accessible.html"><span>Demo 2.2:</span> Accessible form</a>
+            <a href="/demos/form/form-accessible.html">Accessible form</a>
             <ul>
               <li>
                 <code>label</code> tags used (<a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H44">H44</a>).
@@ -72,7 +72,7 @@
             </ul>
           </li>
           <li>
-            <a href="2-3_form-aria.html"><span>Demo 2.3:</span> Form validation using ARIA</a>
+            <a href="/demos/form/form-aria.html">Form validation using ARIA</a>
             <ul>
               <li>
                 <code>aria-required</code> used to mark required field (<a
@@ -85,7 +85,7 @@
             </ul>
           </li>
           <li>
-            <a href="2-4_form-html5.html"><span>Demo 2.4:</span> HTML5 form validation</a>
+            <a href="/demos/form/form-html5.html">HTML5 form validation</a>
             <ul>
               <li><code>required</code> attribute used to mark required fields.</li>
             </ul>
@@ -93,17 +93,17 @@
         </ul>
       </section>
       <section>
-        <h3>3. Content structure</h3>
+        <h3>Content structure</h3>
         <ul>
           <li>
-            <a href="3-1_structure-inaccessible.html"><span>Demo 3.1:</span> Inaccessible content structure</a>
+            <a href="/demos/structure/structure-inaccessible.html">Inaccessible content structure</a>
             <ul>
               <li>No useful heading structure.</li>
               <li>No skip navigation.</li>
             </ul>
           </li>
           <li>
-            <a href="3-2_structure-accessible.html"><span>Demo 3.2:</span> Accessible content structure</a>
+            <a href="/demos/structure/structure-accessible.html">Accessible content structure</a>
             <ul>
               <li>Visually hidden heading in each areas indicates its content.</li>
               <li>Content areas use the semantically appropriate tags.</li>
@@ -113,77 +113,17 @@
         </ul>
       </section>
       <section>
-        <h3>4. Element focus</h3>
+        <h3>ARIA</h3>
         <ul>
           <li>
-            <a href="4-1_focus-inaccessible.html"><span>Demo 4.1:</span> Inaccessible focus handling</a>
-            <ul>
-              <li>"outline:none" used to remove focus indication. No style changes on focus.</li>
-            </ul>
-          </li>
-          <li>
-            <a href="4-2_focus-accessible.html"><span>Demo 4.2:</span> Accessible focus handling</a>
-            <ul>
-              <li>
-                Native focus outline preserved (<a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G165">G165</a
-                >) and :hover styles applied to :focus, too.
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-      <section>
-        <h3>5. Buttons & links</h3>
-        <ul>
-          <li>
-            <a href="5-1_button-inaccessible.html"><span>Demo 5.1:</span> Inaccessible fake buttons</a>
-            <ul>
-              <li>Fake buttons used, partly unfocusable and not triggerable using the keyboard.</li>
-            </ul>
-          </li>
-          <li>
-            <a href="5-2_button-accessible.html"><span>Demo 5.2:</span> (Partly) accessible buttons</a>
-            <ul>
-              <li>
-                Fake button supplied with <code>role="button"</code> attribute (in addition to
-                <code>tabindex="0"</code>) and <code>keydown</code> listener for enter and space keys (<a
-                  href="http://www.w3.org/WAI/GL/wiki/Making_actions_keyboard_accessible_by_using_keyboard_event_handlers_with_WAI-ARIA_controls#Example_1:_Using_Space_to_activate_a_button"
-                  >new technique</a
-                >).
-              </li>
-              <li>Native <code>button</code> element used.</li>
-            </ul>
-          </li>
-          <li>
-            <a href="5-3_link-inaccessible.html"><span>Demo 5.3:</span> Inaccessible icon link</a>
-            <ul>
-              <li>No text alternative to icon</li>
-            </ul>
-          </li>
-          <li>
-            <a href="5-4_link-accessible.html"><span>Demo 5.4:</span> Accessible icon link</a>
-            <ul>
-              <li>Visually hidden text alternative provided</li>
-              <li>
-                Icon element hidden reliably from screenreaders using a custom element with
-                <em>aria-hidden="true" role="presentation"</em>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-      <section>
-        <h3>6. ARIA</h3>
-        <ul>
-          <li>
-            <a href="6-1_autosuggest-inaccessible.html"><span>Demo 6.1:</span> Inaccessible auto-suggest</a>
+            <a href="/demos/aria/autosuggest-inaccessible.html">Inaccessible auto-suggest</a>
             <ul>
               <li>Suggestions not keyboard or screenreader accessible.</li>
               <li>Screenreader users receivce no information about the suggestions.</li>
             </ul>
           </li>
           <li>
-            <a href="6-2_autosuggest-accessible.html"><span>Demo 6.2:</span> Accessible auto-suggest</a>
+            <a href="/demos/aria/autosuggest-accessible.html">Accessible auto-suggest</a>
             <ul>
               <li>Suggestions are keyboard-accessible.</li>
               <li>ARIA live region tells the user about the suggestions.</li>
@@ -192,14 +132,14 @@
             </ul>
           </li>
           <li>
-            <a href="6-3_modal-inaccessible.html"><span>Demo 6.3:</span> Inaccessible modal</a>
+            <a href="/demos/aria/modal-inaccessible.html">Inaccessible modal</a>
             <ul>
               <li>The user is not informed about the opened modal.</li>
               <li>Interaction with elements outside of it is still possible.</li>
             </ul>
           </li>
           <li>
-            <a href="6-4_modal-accessible.html"><span>Demo 6.4:</span> Accessible modal</a>
+            <a href="/demos/aria/modal-accessible.html">Accessible modal</a>
             <ul>
               <li>
                 Focus is trapped within modal (via some
@@ -209,6 +149,41 @@
                 intercepting tabbing), main page content is hidden. The user can only interact with the modal.
               </li>
               <li>ARIA role <code>dialog</code> is used to inform the user about the nature of this component.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h3>Buttons & links</h3>
+        <ul>
+          <li>
+            <a href="/demos/buttons-links/buttons-links-inaccessible.html">Inaccessible buttons and links</a>
+            <ul>
+              <li>Fake buttons used, partly unfocusable and not triggerable using the keyboard.</li>
+              <li>No text alternative to icon</li>
+              <li>"outline:none" used to remove focus outline. No visual indication on focus.</li>
+            </ul>
+          </li>
+          <li>
+            <a href="/demos/buttons-links/buttons-links-accessible.html">(Partly) accessible buttons and links</a>
+            <ul>
+              <li>
+                Fake button supplied with <code>role="button"</code> attribute (in addition to
+                <code>tabindex="0"</code>) and <code>keydown</code> listener for enter and space keys (<a
+                  href="http://www.w3.org/WAI/GL/wiki/Making_actions_keyboard_accessible_by_using_keyboard_event_handlers_with_WAI-ARIA_controls#Example_1:_Using_Space_to_activate_a_button"
+                  >new technique</a
+                >).
+              </li>
+              <li>Native <code>button</code> element used.</li>
+              <li>Visually hidden text alternative to icon</li>
+              <li>
+                Icon element hidden reliably from screenreaders using a custom element with
+                <em>aria-hidden="true" role="presentation"</em>
+              </li>
+              <li>
+                Native focus outline preserved (<a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G165">G165</a
+                >) and :hover styles applied to :focus, too.
+              </li>
             </ul>
           </li>
         </ul>
