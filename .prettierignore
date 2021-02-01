@@ -1,3 +1,2 @@
 package-lock.json
-assets/vendor/*
-!assets/vendor/vuetify.css
+dist
