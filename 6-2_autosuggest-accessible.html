@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" />
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Accessibility</title>
     <link href="assets/css/main.css" media="all" rel="stylesheet" type="text/css" />
     <style>
@@ -30,56 +30,61 @@
       <h1><span>Demo 6.2:</span> Accessible auto-suggest</h1>
     </header>
     <main role="main">
-      <input type="text" class="autosuggest">
+      <input type="text" class="autosuggest" />
     </main>
-    <hr>
+    <hr />
     <a class="js-toggle" href="#fixes">Show fixes and notes</a>
     <div class="fixes is-invisible js-details" id="fixes">
       <h2>Fixes</h2>
       <ul>
-          <li>Suggestions are keyboard-accessible.</li>
-          <li>ARIA live region tells the user about the suggestions.</li>
-          <li>ARIA roles <code>listbox</code> (container) and <code>option</code> (suggestions) added.</li>
-          <li>ARIA state <code>aria-expanded</code> toggled when suggestions are shown/hidden.</li>
+        <li>Suggestions are keyboard-accessible.</li>
+        <li>ARIA live region tells the user about the suggestions.</li>
+        <li>ARIA roles <code>listbox</code> (container) and <code>option</code> (suggestions) added.</li>
+        <li>ARIA state <code>aria-expanded</code> toggled when suggestions are shown/hidden.</li>
       </ul>
       <div class="notes">
         <h2>Notes</h2>
         <ul>
-          <li><code>listbox</code> and <code>option</code> roles as well as <code>aria-expanded</code> state seem to be ignored in VoiceOver with any browser.</li>
+          <li>
+            <code>listbox</code> and <code>option</code> roles as well as <code>aria-expanded</code> state seem to be
+            ignored in VoiceOver with any browser.
+          </li>
           <li><code>aria-live</code> seems to be ignored in NVDA with Chrome but works with Firefox.</li>
         </ul>
       </div>
     </div>
-    <hr>
+    <hr />
     <nav role="navigation">
       <a class="next" href="6-3_modal-inaccessible.html">Forward to "<span>Demo 6.3:</span> Inaccessible modal" »</a>
-      <a class="prev" href="6-1_autosuggest-inaccessible.html">« Back to "<span>Demo 6.1:</span> Inaccessible auto-suggest"</a>
+      <a class="prev" href="6-1_autosuggest-inaccessible.html"
+        >« Back to "<span>Demo 6.1:</span> Inaccessible auto-suggest"</a
+      >
       <a class="index" href="index.html">Index</a>
     </nav>
     <script src="assets/js/main.js" type="text/javascript"></script>
     <script>
       // WARNING: This code is for demo purposes only and does not work in IE < 9
-      ;(function() {
-      	'use strict';
+      (function () {
+        "use strict";
 
         function submitRequest(query, field, container, status) {
           var request = new XMLHttpRequest();
 
-          request.onload = function() {
+          request.onload = function () {
             var response = JSON.parse(request.responseText),
               suggestions;
 
             if (response && response.suggestions) {
               // Filter list since we only have a static server
-              suggestions = response.suggestions.filter(function(suggestion) {
-                return suggestion.match(new RegExp(query, 'i'));
+              suggestions = response.suggestions.filter(function (suggestion) {
+                return suggestion.match(new RegExp(query, "i"));
               });
 
               showSuggestions(suggestions, field, container, status);
             }
           };
 
-          request.open('get', 'data/suggestions.json?' + query, true);
+          request.open("get", "data/suggestions.json?" + query, true);
           request.send();
         }
 
@@ -94,120 +99,136 @@
         function showSuggestions(suggestions, field, container, status) {
           var items = [];
 
-          container.innerHTML = '';
-          container.classList.add('is-visible');
+          container.innerHTML = "";
+          container.classList.add("is-visible");
 
-          suggestions.forEach(function(text, index) {
-            var item = document.createElement('div');
+          suggestions.forEach(function (text, index) {
+            var item = document.createElement("div");
 
             item.innerHTML = text;
 
-            item.setAttribute('role', 'option');
-            item.setAttribute('tabindex', '-1');
+            item.setAttribute("role", "option");
+            item.setAttribute("tabindex", "-1");
 
             container.appendChild(item);
 
-            item.addEventListener('click', function(event) {
-              setValue(field, container, text);
-            }, false);
+            item.addEventListener(
+              "click",
+              function (event) {
+                setValue(field, container, text);
+              },
+              false
+            );
 
             // Add keyboard navigation
             // Arrow up/down cycles through options
             // Enter selects option
-            item.addEventListener('keydown', function(event) {
-              if (event.keyCode === 40) {
-                event.preventDefault();
+            item.addEventListener(
+              "keydown",
+              function (event) {
+                if (event.keyCode === 40) {
+                  event.preventDefault();
 
-                if (index < suggestions.length - 1) {
-                  items[index + 1].focus();
-                } else {
-                  field.focus();
-                }
-              } else if (event.keyCode === 38) {
-                event.preventDefault();
+                  if (index < suggestions.length - 1) {
+                    items[index + 1].focus();
+                  } else {
+                    field.focus();
+                  }
+                } else if (event.keyCode === 38) {
+                  event.preventDefault();
 
-                if (index > 0) {
-                  items[index - 1].focus();
-                } else {
-                  field.focus();
+                  if (index > 0) {
+                    items[index - 1].focus();
+                  } else {
+                    field.focus();
+                  }
+                } else if (event.keyCode === 13) {
+                  setValue(field, container, text);
                 }
-              } else if (event.keyCode === 13) {
-                setValue(field, container, text);
-              }
-            }, false);
+              },
+              false
+            );
 
             items.push(item);
           });
 
-          field.setAttribute('aria-expanded', 'true');
+          field.setAttribute("aria-expanded", "true");
 
           // (Re)bind EventListener
           if (field._arrowKeyEventListener) {
-            field.removeEventListener('keydown', field._arrowKeyEventListener, false);
+            field.removeEventListener("keydown", field._arrowKeyEventListener, false);
           }
 
           field._arrowKeyEventListener = arrowKeyEventListener.bind(null, items);
-          field.addEventListener('keydown', field._arrowKeyEventListener, false);
+          field.addEventListener("keydown", field._arrowKeyEventListener, false);
 
           // Slightly delay status update
-          setTimeout(function() {
-            status.innerHTML = '';
-            status.innerHTML = suggestions.length + ' suggestions found.'
+          setTimeout(function () {
+            status.innerHTML = "";
+            status.innerHTML = suggestions.length + " suggestions found.";
 
             if (suggestions.length) {
-              status.innerHTML += ' Use arrow keys to navigate.';
+              status.innerHTML += " Use arrow keys to navigate.";
             }
           }, 1000);
         }
 
         function setValue(field, container, value) {
           field.value = value;
-          
+
           hideSuggestions(field, container);
         }
 
         function hideSuggestions(field, container) {
-          field.setAttribute('aria-expanded', 'false');
+          field.setAttribute("aria-expanded", "false");
           field.focus();
 
-          container.innerHTML = '';
-          container.classList.remove('is-visible');
+          container.innerHTML = "";
+          container.classList.remove("is-visible");
         }
-      
-      	[].forEach.call(document.querySelectorAll('.autosuggest'), function(field) {
-          var container = document.createElement('div'),
-              status = document.createElement('div');
 
-          container.classList.add('suggestions');
-          container.setAttribute('role', 'listbox');
+        [].forEach.call(document.querySelectorAll(".autosuggest"), function (field) {
+          var container = document.createElement("div"),
+            status = document.createElement("div");
+
+          container.classList.add("suggestions");
+          container.setAttribute("role", "listbox");
           field.parentNode.insertBefore(container, field.nextSibling);
 
           // Add ARIA live region to tell the user something happened
-          status.classList.add('status');
-          status.setAttribute('role', 'status');
-          status.setAttribute('aria-live', 'assertive');
+          status.classList.add("status");
+          status.setAttribute("role", "status");
+          status.setAttribute("aria-live", "assertive");
           field.parentNode.insertBefore(status, container.nextSibling);
-        
-          field.addEventListener('keyup', function(event) {
-            var val = event.target.value;
 
-            // Submit Ajax request (unless enter or esc keys were used)
-            if (event.keyCode !== 13 && event.keyCode !== 27 && val.length > 0) {
-              submitRequest(val, event.target, container, status);
-            }
+          field.addEventListener(
+            "keyup",
+            function (event) {
+              var val = event.target.value;
 
-            // Remove suggestions on esc
-            if (event.keyCode === 27) {
-              hideSuggestions(field, container);
-            }
-          }, false);
-        
+              // Submit Ajax request (unless enter or esc keys were used)
+              if (event.keyCode !== 13 && event.keyCode !== 27 && val.length > 0) {
+                submitRequest(val, event.target, container, status);
+              }
+
+              // Remove suggestions on esc
+              if (event.keyCode === 27) {
+                hideSuggestions(field, container);
+              }
+            },
+            false
+          );
+
           // Remove suggestions on esc
-          container.addEventListener('keydown', function(event) {
-            if (event.keyCode === 27) {
-              hideSuggestions(field, container);
-            }
-          }, false);
+          container.addEventListener(
+            "keydown",
+            function (event) {
+              if (event.keyCode === 27) {
+                hideSuggestions(field, container);
+              }
+            },
+            false
+          );
         });
       })();
     </script>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" />
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Accessibility</title>
     <link href="assets/css/main.css" media="all" rel="stylesheet" type="text/css" />
     <style>
@@ -32,9 +32,9 @@
     <header role="banner">
       <h1><span>Demo 3.2:</span> Accessible content structure</h1>
 
-      <hr>
+      <hr />
       <a href="#main" class="skiplink">Skip navigation</a>
-      
+
       <p>Examplary navigation</p>
       <ul>
         <li><a href="#">Elektrotechnik (E)</a></li>
@@ -48,62 +48,92 @@
         <h2 class="visuallyhidden" id="main">Main content</h2>
 
         <p>
-          Lorem ipsum dolor sit amet, <a href="#">consetetur</a> sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          Lorem ipsum dolor sit amet, <a href="#">consetetur</a> sadipscing elitr, sed diam nonumy eirmod tempor
+          invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+          dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+          ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+          magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
+          kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
         </p>
         <p>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+          takimata sanctus est Lorem ipsum dolor sit amet.
         </p>
       </main>
       <aside role="complementary" class="aside column">
         <h2 class="visuallyhidden">Complementary content</h2>
 
         <p>
-          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+          est Lorem ipsum dolor sit amet.
         </p>
         <p>
-          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+          est Lorem ipsum dolor sit amet.
         </p>
       </aside>
     </div>
-    <hr>
+    <hr />
     <a class="js-toggle" href="#fixes">Show fixes and notes</a>
     <div class="fixes is-invisible js-details" id="fixes">
       <h2>Fixes</h2>
       <ul>
         <li>Visually hidden heading in each areas indicates its content.</li>
-        <li>Content areas use the semantically appropriate tags like <code>&lt;main&gt;</code> and <code>&lt;aside&gt;</code> (in combination with the corresponding ARIA roles <code>role="main"</code> and <code>role="complementary"</code>).</li>
+        <li>
+          Content areas use the semantically appropriate tags like <code>&lt;main&gt;</code> and
+          <code>&lt;aside&gt;</code> (in combination with the corresponding ARIA roles <code>role="main"</code> and
+          <code>role="complementary"</code>).
+        </li>
         <li>Visually hidden but focusable skip navigation allows to jump to specific areas.</li>
       </ul>
       <div class="notes">
         <h2>Notes</h2>
         <ul>
-          <li>Corresponding success criterion: <a href="https://www.w3.org/WAI/WCAG21/quickref/#qr-navigation-mechanisms-skip">2.4.1 A mechanism is available to bypass blocks of content that are repeated on multiple Web pages. (Level A)</a>.</li>
+          <li>
+            Corresponding success criterion:
+            <a href="https://www.w3.org/WAI/WCAG21/quickref/#qr-navigation-mechanisms-skip"
+              >2.4.1 A mechanism is available to bypass blocks of content that are repeated on multiple Web pages.
+              (Level A)</a
+            >.
+          </li>
           <li>The solution above combines different sufficient techniques.</li>
         </ul>
       </div>
     </div>
-    <hr>
+    <hr />
     <nav role="navigation">
-      <a class="next" href="4-1_focus-inaccessible.html">Forward to "<span>Demo 4.1:</span> Inaccessible focus handling" »</a>
-      <a class="prev" href="3-1_structure-inaccessible.html">« Back to "<span>Demo 3.1:</span> Inaccessible content structure"</a>
+      <a class="next" href="4-1_focus-inaccessible.html"
+        >Forward to "<span>Demo 4.1:</span> Inaccessible focus handling" »</a
+      >
+      <a class="prev" href="3-1_structure-inaccessible.html"
+        >« Back to "<span>Demo 3.1:</span> Inaccessible content structure"</a
+      >
       <a class="index" href="index.html">Index</a>
     </nav>
     <script src="assets/js/main.js" type="text/javascript"></script>
     <script>
       // WARNING: This code is for demo purposes only and does not work in IE < 9
-      ;(function() {
-        'use strict';
-      
-        document.querySelector('.skiplink').addEventListener('click', function(event) {
-          var href = event.target.getAttribute('href'),
-              target = document.querySelector(href);
-          
-          // Make element focusable
-          target.setAttribute('tabindex', '-1');
+      (function () {
+        "use strict";
 
-          // Focus programmatically
-          target.focus();
-        }, false);
+        document.querySelector(".skiplink").addEventListener(
+          "click",
+          function (event) {
+            var href = event.target.getAttribute("href"),
+              target = document.querySelector(href);
+
+            // Make element focusable
+            target.setAttribute("tabindex", "-1");
+
+            // Focus programmatically
+            target.focus();
+          },
+          false
+        );
       })();
     </script>
   </body>

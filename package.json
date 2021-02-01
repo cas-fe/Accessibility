@@ -1,0 +1,24 @@
+{
+  "name": "cas-fe-accessibility-demos",
+  "version": "1.0.0",
+  "description": "Demos for CAS frontend engineering accessibility lecture",
+  "scripts": {
+    "start": "browser-sync --watch",
+    "lint": "prettier --write .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cas-fe/17-Accessibility.git"
+  },
+  "author": "Thomas Jaggi <thomas@responsive.ch> (https://responsive.ch)",
+  "contributors": [
+    "Werner Hänggi <Werner.Haenggi@AdNovum.CH>"
+  ],
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.26.14",
+    "prettier": "^2.2.1"
+  }
+}
