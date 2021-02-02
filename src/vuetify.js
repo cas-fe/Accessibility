@@ -1,3 +1,4 @@
+import "vuetify/dist/vuetify.css";
 import "./vuetify.css";
 import "@mdi/font/css/materialdesignicons.css";
 import Vue from "vue";
