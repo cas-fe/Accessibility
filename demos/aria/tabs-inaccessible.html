@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Accessibility</title>
+    <link href="../../dist/index.css" rel="stylesheet" />
+    <link href="../../dist/vuetify.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header role="banner">
+      <h1>Inaccessible tabs (WIP)</h1>
+    </header>
+    <main role="main">
+      <div data-app>
+        <div class="v-application">
+          <div>
+            <v-tabs v-model="tab">
+              <v-tab href="#tab-1">Nils Frahm</v-tab>
+              <v-tab href="#tab-2">Agnes Obel</v-tab>
+            </v-tabs>
+            <v-tabs-items v-model="tab">
+              <v-tab-item value="tab-1">
+                <v-card>
+                  <v-card-text>
+                    <p>
+                      Nils Frahm is a German musician, composer and record producer based in Berlin. He is known for
+                      combining classical and electronic music and for an unconventional approach to the piano in which
+                      he mixes a grand piano, upright piano, Roland Juno-60, Rhodes piano, drum machine, and Moog
+                      Taurus.
+                    </p>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item value="tab-2">
+                <v-card>
+                  <v-card-text>
+                    <p>
+                      Agnes Caroline Thaarup Obel is a Danish singer/songwriter. Her first album, Philharmonics, was
+                      released by PIAS Recordings on 4 October 2010 in Europe. Philharmonics was certified gold in June
+                      2011 by the Belgian Entertainment Association (BEA) for sales of 10,000 Copies.
+                    </p>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+            </v-tabs-items>
+          </div>
+        </div>
+      </div>
+    </main>
+    <hr />
+    <a class="js-toggle" href="#issues">Show issues</a>
+    <div class="issues is-invisible js-details" id="issues">
+      <h2>Issues</h2>
+      <ul>
+        <!-- Insert issues -->
+      </ul>
+    </div>
+    <hr />
+    <nav role="navigation">
+      <a class="next" href="../../demos/aria/tabs-accessible.html">Forward to "Accessible tabs" »</a>
+      <a class="prev" href="../../demos/aria/modal-accessible.html">« Back to "Accessible modal"</a>
+      <a class="index" href="../../index.html">Index</a>
+    </nav>
+    <script src="../../dist/index.js"></script>
+    <script src="../../dist/vuetify.js"></script>
+  </body>
+</html>
