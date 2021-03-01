@@ -103,9 +103,12 @@ label {
 }
 input[type="text"],
 input[type="email"],
-input[type="tel"] {
+input[type="date"],
+select {
   max-width: 100%;
+  font: inherit;
   width: 16.66667em;
+  box-sizing: border-box;
 }
 .error {
   color: red;

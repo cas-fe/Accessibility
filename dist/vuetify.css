@@ -29004,6 +29004,10 @@ html.overflow-y-hidden {
   right: 0;
 }
 /* Overwrites */
+.v-input {
+  max-width: 100%;
+  width: 16.66667em;
+}
 .v-input input {
   background: transparent;
   border: 0;
