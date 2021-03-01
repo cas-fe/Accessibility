@@ -5,4 +5,4 @@ Demos
 ## Development
 
 - Install dependencies: `npm install`
-- Start server with live-reload bhavior: `npm start`
+- Start server with live-reload behavior: `npm start`
