@@ -6,6 +6,42 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Accessibility</title>
     <link href="../../dist/index.css" rel="stylesheet" />
+    <style>
+      .tooltip {
+        position: relative;
+        display: inline-block;
+        height: 24px;
+        vertical-align: bottom;
+      }
+      .tooltip span {
+        /* Hide visually */
+        clip: rect(0 0 0 0);
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+      }
+      .tooltip:hover span,
+      .tooltip.visible span {
+        /* Reset visually hidden styles */
+        clip: auto;
+        height: auto;
+        width: auto;
+        overflow: visible;
+
+        /* Add styles similar to vuetify example */
+        background: rgba(97, 97, 97, 0.9);
+        color: #fff;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 22px;
+        display: inline-block;
+        padding: 5px 16px;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    </style>
   </head>
   <body>
     <header role="banner">
