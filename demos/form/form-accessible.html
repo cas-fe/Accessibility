@@ -6,6 +6,42 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Accessibility</title>
     <link href="../../dist/index.css" rel="stylesheet" />
+    <style>
+      .tooltip {
+        position: relative;
+        display: inline-block;
+        height: 24px;
+        vertical-align: bottom;
+      }
+      .tooltip span {
+        /* Hide visually */
+        clip: rect(0 0 0 0);
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+      }
+      .tooltip:hover span,
+      .tooltip.visible span {
+        /* Reset visually hidden styles */
+        clip: auto;
+        height: auto;
+        width: auto;
+        overflow: visible;
+
+        /* Add styles similar to vuetify example */
+        background: rgba(97, 97, 97, 0.9);
+        color: #fff;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 22px;
+        display: inline-block;
+        padding: 5px 16px;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    </style>
   </head>
   <body>
     <header role="banner">
@@ -29,12 +65,21 @@
         </p>
         <p>
           <label for="type">Type</label>
-          <select id="type" name="type">
+          <select id="type" name="type" aria-describedby="tooltip-type">
             <option>Foo</option>
             <option>Bar</option>
             <option>Fizz</option>
             <option>Buzz</option>
           </select>
+          <span class="tooltip" id="tooltip-type">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"
+              />
+            </svg>
+            <span>Tooltip</span>
+          </span>
         </p>
         <p>
           <label for="date">Date</label>
@@ -164,6 +209,29 @@
           },
           false
         );
+
+        // Show tooltips on field focus (for keyboard users)
+        [].forEach.call(form.querySelectorAll(".tooltip"), function (element) {
+          var id = element.id;
+          var field = form.querySelector('[aria-describedby~="' + id + '"]');
+
+          if (field) {
+            field.addEventListener(
+              "focus",
+              function (event) {
+                element.classList.add("visible");
+              },
+              false
+            );
+            field.addEventListener(
+              "blur",
+              function (event) {
+                element.classList.remove("visible");
+              },
+              false
+            );
+          }
+        });
       })();
     </script>
   </body>

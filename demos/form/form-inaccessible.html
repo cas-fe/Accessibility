@@ -28,10 +28,16 @@
         <div data-app>
           <div class="v-application">
             <div>
-              <p>
+              <div class="d-flex">
                 <v-select :items="['Foo', 'Bar', 'Fizz', 'Buzz']" label="Type"></v-select>
-              </p>
-              <p>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon color="primary" dark v-bind="attrs" v-on="on"> mdi-help-circle </v-icon>
+                  </template>
+                  <span>Tooltip</span>
+                </v-tooltip>
+              </div>
+              <div>
                 <v-menu
                   ref="menu"
                   v-model="menu"
@@ -57,7 +63,7 @@
                     <v-btn text color="primary" @click="$refs.menu.save(date)"> OK </v-btn>
                   </v-date-picker>
                 </v-menu>
-              </p>
+              </div>
             </div>
           </div>
         </div>
@@ -73,7 +79,7 @@
       <ul>
         <li><code>label</code> tags omitted or hidden.</li>
         <li>Required fields not properly marked.</li>
-        <li>Inaccesible select and datepicker widgets from UI framework.</li>
+        <li>Inaccesible select, tooltip and datepicker widgets from UI framework.</li>
         <li>Unnoticed insertion of error message.</li>
         <li>No connection of error messages to invalid fields.</li>
       </ul>
