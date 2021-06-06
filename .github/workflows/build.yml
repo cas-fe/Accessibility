@@ -10,10 +10,10 @@ jobs:
           node-version: '14'
       - run: npm install
       - run: npm run build
-      - name: Commit report
+      - name: Commit build
         run: |
           git config --global user.name 'Github Action'
           git config --global user.email 'backflip@users.noreply.github.com'
           git add --force dist
-          git commit -m "Automated build"
+          git commit -m "ci: automated build"
           git push
