@@ -9,5 +9,5 @@ Demos
 
 ## Deployment
 
-- Code in `gh-pages` branch is auto-published on https://cas-fe.github.io/17-Accessibility/
+- Code in `gh-pages` branch is auto-published on https://cas-fe.github.io/Accessibility/
 - A [Github Action](./.github/workflows/build.yml) takes care of building assets after every push
