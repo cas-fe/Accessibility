@@ -15,5 +15,5 @@ jobs:
           git config --global user.name 'Github Action'
           git config --global user.email 'backflip@users.noreply.github.com'
           git add --force dist
-          git commit -m "ci: automated build"
+          git diff-index --quiet HEAD || git commit -m "ci: automated build"
           git push
