@@ -65,24 +65,21 @@
         "use strict";
 
         function submitRequest(query, field, container, status) {
-          var request = new XMLHttpRequest();
-
-          request.onload = function () {
-            var response = JSON.parse(request.responseText),
-              suggestions;
-
-            if (response && response.suggestions) {
-              // Filter list since we only have a static server
-              suggestions = response.suggestions.filter(function (suggestion) {
+          fetch("/data/suggestions.json?" + query)
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (data) {
+              // Filter list as we only have a static server
+              const suggestions = data.suggestions.filter(function (suggestion) {
                 return suggestion.match(new RegExp(query, "i"));
               });
 
+              return suggestions;
+            })
+            .then(function (suggestions) {
               showSuggestions(suggestions, field, container, status);
-            }
-          };
-
-          request.open("get", "data/suggestions.json?" + query, true);
-          request.send();
+            });
         }
 
         function arrowKeyEventListener(items, event) {
