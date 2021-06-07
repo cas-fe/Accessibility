@@ -33,18 +33,9 @@
   </head>
   <body>
     <header role="banner">
-      <h1>Inaccessible buttons and links</h1>
+      <h1>Inaccessible focus styles</h1>
     </header>
     <main role="main">
-      <p>
-        Unfocusable fake button:
-        <span class="button">Do stuff</span>
-      </p>
-      <p>
-        Focusable fake button, no keyboard interaction:
-        <span class="button" tabindex="0">Do stuff, too</span>
-      </p>
-      <p>Icon link without text alternative: <a href="#" class="fa fa-shopping-cart"></a></p>
       <div class="reset">
         <p>Missing focus styles:</p>
         <p>
@@ -76,34 +67,17 @@
     <div class="issues is-invisible js-details" id="issues">
       <h2>Issues</h2>
       <ul>
-        <li>Fake buttons used, partly unfocusable and not triggerable using the keyboard.</li>
-        <li>No text alternative to icon</li>
         <li>"outline:none" used to remove focus outline. No visual indication on focus.</li>
       </ul>
     </div>
     <hr />
     <nav role="navigation">
-      <a class="next" href="../../demos/buttons-links/buttons-links-accessible.html"
+      <a class="next" href="../../demos/visual/focus-styles-accessible.html"
         >Forward to "(Partly) accessible buttons and links" »</a
       >
       <a class="prev" href="../../demos/aria/tabs-accessible.html">« Back to "Accessible tabs"</a>
       <a class="index" href="../../index.html">Index</a>
     </nav>
     <script src="../../dist/index.js"></script>
-    <script>
-      (function () {
-        "use strict";
-
-        [].forEach.call(document.querySelectorAll(".button"), function (button) {
-          button.addEventListener(
-            "click",
-            function (event) {
-              alert("WHOAH");
-            },
-            false
-          );
-        });
-      })();
-    </script>
   </body>
 </html>

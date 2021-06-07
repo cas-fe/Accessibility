@@ -15,24 +15,9 @@
   </head>
   <body>
     <header role="banner">
-      <h1>(Partly) accessible buttons and links</h1>
+      <h1>Accessible focus styles</h1>
     </header>
     <main role="main">
-      <p>
-        Almost accessible fake button:
-        <span class="button" role="button" tabindex="0">Do stuff</span>
-      </p>
-      <p>
-        Completely accessible native button:
-        <button class="button">Do stuff, too</button>
-      </p>
-      <p>
-        Icon link wit text alternative:
-        <a href="#">
-          <span class="fa fa-shopping-cart" role="presentation" aria-hidden="true"></span>
-          <span class="visuallyhidden">Shppping cart</span>
-        </a>
-      </p>
       <div class="reset">
         <p>Custom focus styles:</p>
         <p>
@@ -65,19 +50,6 @@
       <h2>Fixes</h2>
       <ul>
         <li>
-          Fake button supplied with <code>role="button"</code> attribute (in addition to <code>tabindex="0"</code>) and
-          <code>keydown</code> listener for enter and space keys (<a
-            href="http://www.w3.org/WAI/GL/wiki/Making_actions_keyboard_accessible_by_using_keyboard_event_handlers_with_WAI-ARIA_controls#Example_1:_Using_Space_to_activate_a_button"
-            >new technique</a
-          >).
-        </li>
-        <li>Native <code>button</code> element used.</li>
-        <li>Visually hidden text alternative provided</li>
-        <li>
-          Icon element hidden reliably from screenreaders using a custom element with
-          <em>aria-hidden="true" role="presentation"</em>
-        </li>
-        <li>
           Native focus outline preserved (<a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G165">G165</a>) and
           :hover styles applied to :focus, too.
         </li>
@@ -85,23 +57,6 @@
       <div class="notes">
         <h2>Notes</h2>
         <ul>
-          <li>
-            Corresponding success criterion for keyboard navigation:
-            <a href="https://www.w3.org/WAI/WCAG21/quickref/?#qr-keyboard-operation-keyboard-operable">2.1.1 Keyboard</a
-            >.
-          </li>
-          <li>
-            The preferred solution regarding buttons is to <strong>use a real button or link</strong>, see
-            <a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H91">H91</a>. Further reading:
-            <a href="https://developer.paciellogroup.com/blog/2011/04/html5-accessibility-chops-just-use-a-button/"
-              >Just use a (native HTML) button</a
-            >
-            by Steve Faulkner,
-            <a href="https://karlgroves.com/2013/05/14/links-are-not-buttons-neither-are-divs-and-spans"
-              >Links are not buttons. Neither are DIVs and SPANs</a
-            >
-            by Karl Groves.
-          </li>
           <li>
             Corresponding success criterion for focus styles:
             <a href="https://www.w3.org/WAI/WCAG21/quickref/#qr-navigation-mechanisms-focus-visible"
@@ -124,43 +79,11 @@
     </div>
     <hr />
     <nav role="navigation">
-      <a class="prev" href="../../demos/buttons-links/buttons-links-inaccessible.html"
-        >« Back to "Inaccessible buttons and links"</a
+      <a class="prev" href="../../demos/visual/focus-styles-inaccessible.html"
+        >« Back to "Inaccessible focus styles"</a
       >
       <a class="index" href="../../index.html">Index</a>
     </nav>
     <script src="../../dist/index.js"></script>
-    <script>
-      (function () {
-        "use strict";
-
-        [].forEach.call(document.querySelectorAll(".button"), function (button) {
-          var callback = function (event) {
-            alert("WHOAH");
-          };
-
-          button.addEventListener(
-            "click",
-            function (event) {
-              callback(event);
-            },
-            false
-          );
-
-          // OPTIMIZATION: Add listener for enter and space key
-          if (button.tagName.toLowerCase() !== "button") {
-            button.addEventListener(
-              "keydown",
-              function (event) {
-                if ([13, 32].indexOf(event.keyCode) !== -1) {
-                  callback(event);
-                }
-              },
-              false
-            );
-          }
-        });
-      })();
-    </script>
   </body>
 </html>
