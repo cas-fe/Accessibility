@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Demos for CAS frontend engineering accessibility lecture",
   "scripts": {
-    "start": "browser-sync --watch & rollup --config --watch",
+    "start": "browser-sync --watch --no-ghost-mode & rollup --config --watch",
     "build": "rollup --config",
     "lint": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,6 +20,7 @@
   "dependencies": {
     "@mdi/font": "^5.9.55",
     "a11y-dialog": "^5.4.2",
+    "focus-visible": "^5.2.0",
     "vue": "^2.6.12",
     "vuetify": "^2.4.3"
   },

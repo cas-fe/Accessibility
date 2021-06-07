@@ -7,21 +7,25 @@
     <title>Accessibility</title>
     <link href="../../dist/index.css" rel="stylesheet" />
     <style>
-      .reset a {
+      .demo a,
+      .demo [role="button"] {
         color: inherit;
         text-decoration: underline;
+        cursor: pointer;
       }
 
       /* Style changes only applied to :hover and :active */
-      .reset a:hover,
-      .reset a:active {
+      .demo a:hover,
+      .demo a:active,
+      .demo [role="button"]:hover,
+      .demo [role="button"]:active {
         color: #a4c400;
         text-decoration: none;
       }
 
       /* Focus outline removed */
       .reset *:focus {
-        outline: none !important;
+        outline: none;
       }
     </style>
   </head>
@@ -30,29 +34,25 @@
       <h1>Inaccessible focus styles</h1>
     </header>
     <main role="main">
-      <div class="reset">
-        <p>Missing focus styles:</p>
+      <div class="demo">
+        <h2>Default focus styles</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in enim at massa viverra pellentesque. Donec
-          egestas nulla non nibh sagittis adipiscing. Aenean magna massa, porta ut venenatis id, posuere quis dolor.
-          Nullam et diam non tellus fringilla volutpat. Donec nec libero enim, id aliquet felis. Sed sollicitudin
-          laoreet massa, ut dignissim magna elementum et. Nulla malesuada libero vitae tortor rutrum eget commodo ipsum
-          luctus. Quisque lacus metus, vehicula vel volutpat vitae, commodo in dui. Vivamus et
-          <a href="#">velit</a>
-          urna. Aenean eu justo vitae odio fermentum adipiscing. Pellentesque nulla est, vestibulum sit amet consequat
-          non, elementum ac lectus. Aliquam erat volutpat. Sed dolor erat, lobortis at tempus vel, ornare in leo.
-          Suspendisse in arcu felis.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et
+          <a href="#">Link</a>
+          urna. Aenean eu justo vitae odio fermentum adipiscing. Vivamus et
+          <span role="button" tabindex="0">DIY button</span>
+          urna. Aenean eu justo vitae odio fermentum adipiscing.
         </p>
+      </div>
+
+      <div class="demo reset">
+        <h2>Removed focus outline</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in enim at massa viverra pellentesque. Donec
-          egestas nulla non nibh sagittis adipiscing. Aenean magna massa, porta ut venenatis id, posuere quis dolor.
-          Nullam et diam
-          <a href="#">non tellus fringilla</a>
-          volutpat. Donec nec libero enim, id aliquet felis. Sed sollicitudin laoreet massa, ut dignissim magna
-          elementum et. Nulla malesuada libero vitae tortor rutrum eget commodo ipsum luctus. Quisque lacus metus,
-          vehicula vel volutpat vitae, commodo in dui. Vivamus et velit urna. Aenean eu justo vitae odio fermentum
-          adipiscing. Pellentesque nulla est, vestibulum sit amet consequat non, elementum ac lectus. Aliquam erat
-          volutpat. Sed dolor erat, lobortis at tempus vel, ornare in leo. Suspendisse in arcu felis.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et
+          <a href="#">Link</a>
+          urna. Aenean eu justo vitae odio fermentum adipiscing. Vivamus et
+          <span role="button" tabindex="0">DIY button</span>
+          urna. Aenean eu justo vitae odio fermentum adipiscing.
         </p>
       </div>
     </main>
@@ -67,7 +67,7 @@
     <hr />
     <nav role="navigation">
       <a class="next" href="../../demos/visual/focus-styles-accessible.html"
-        >Forward to "(Partly) accessible buttons and links" »</a
+        >Forward to "Accessible focus styles" »</a
       >
       <a class="prev" href="../../demos/aria/tabs-accessible.html">« Back to "Accessible tabs"</a>
       <a class="index" href="../../index.html">Index</a>

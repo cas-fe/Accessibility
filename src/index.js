@@ -1,5 +1,6 @@
 import "./index.css";
 import "a11y-dialog";
+import "focus-visible";
 
 // TODO: Beautify
 !(function () {
