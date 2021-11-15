@@ -7,6 +7,42 @@
     <title>Accessibility</title>
     <link href="../../dist/index.css" rel="stylesheet" />
     <link href="../../dist/vuetify.css" rel="stylesheet" />
+
+    <style>
+      .checkbox {
+        cursor: pointer;
+        font-size: 13px;
+        outline: none;
+        color: rgb(0, 0, 0);
+        display: inline-flex;
+        margin: 1rem 0 2rem;
+      }
+
+      .checkbox-inner {
+        display: flex;
+      }
+
+      .checkbox-icon {
+        margin-right: 10px;
+        height: 17px;
+        outline: none;
+      }
+
+      .checkbox-icon svg {
+        width: 17px;
+        height: 17px;
+      }
+      .checkbox-icon svg:nth-child(2) {
+        display: none;
+      }
+
+      .checkbox.selected .checkbox-icon svg {
+        display: none;
+      }
+      .checkbox.selected .checkbox-icon svg:nth-child(2) {
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <header role="banner">
@@ -67,6 +103,21 @@
             </div>
           </div>
         </div>
+        <div>
+          <div class="checkbox">
+            <div class="checkbox-inner">
+              <span class="checkbox-icon" size="large" tabindex="0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 85">
+                  <path d="M85 85H0V0h85zM4.736 80.132l75.478.214V4.887L4.736 4.673z"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 85">
+                  <path d="M85 85H0V0h85zM4.736 80.132l75.478.214V4.887L4.736 4.673zM17.5 67.5h50v-50h-50z"></path>
+                </svg>
+              </span>
+              <span>AGB gelesen</span>
+            </div>
+          </div>
+        </div>
         <p>
           <input type="submit" value="Submit" />
         </p>
@@ -96,6 +147,12 @@
       (function () {
         "use strict";
 
+        // Checkbox
+        document.querySelector(".checkbox").addEventListener("click", function (event) {
+          event.currentTarget.classList.toggle("selected");
+        });
+
+        // Validation
         var form = document.querySelector("form"),
           fields = [],
           testField = function (field) {
