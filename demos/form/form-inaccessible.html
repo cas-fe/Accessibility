@@ -9,6 +9,129 @@
     <link href="../../dist/vuetify.css" rel="stylesheet" />
 
     <style>
+      .select {
+        display: flex;
+        margin: 1rem 0;
+      }
+      .select-wrapper {
+        position: relative;
+        border: 1px solid rgb(201, 201, 201);
+      }
+      .select-inner {
+        position: relative;
+      }
+      .select-field {
+        position: relative;
+        width: 100%;
+      }
+      .select-field-wrapper {
+        position: relative;
+        display: flex;
+        flex-basis: 100%;
+        align-items: stretch;
+        height: 56px;
+      }
+      .select-field-inner {
+        display: flex;
+        width: 100%;
+        position: relative;
+      }
+      .select-field-input {
+        position: relative;
+        box-shadow: none;
+        outline: none;
+        padding-left: 20px;
+        padding-top: 12px;
+        border: none;
+        font-size: 13px;
+        width: 100%;
+        line-height: 24px;
+        transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+        background-color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
+        padding-right: 80px;
+      }
+      .select-field-label {
+        position: absolute;
+        left: 20px;
+        z-index: 1;
+        transition: all 0.25s ease-in-out 0s;
+        line-height: 16px;
+        top: 8px;
+        font-size: 11px;
+        color: rgb(172, 172, 172);
+      }
+      .select-field-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        right: 16px !important;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        height: 19px;
+        width: 19px;
+        right: 50px;
+      }
+      .select-field-icon-inner {
+        line-height: 1px;
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .select-field-icon-inner svg {
+        width: 10px;
+        height: 10px;
+        fill: rgb(0, 0, 0);
+      }
+      .select-items {
+        display: none;
+        position: absolute;
+        left: -1px;
+        right: -1px;
+        z-index: 100;
+        max-height: 250px;
+        overflow-y: auto;
+        padding-left: 0px;
+        margin-bottom: 0px;
+        background-color: rgb(255, 255, 255);
+        top: 56px;
+        border-width: 0px 1px 1px;
+        border-right-style: solid;
+        border-left-style: solid;
+        border-right-color: rgb(172, 172, 172);
+        border-left-color: rgb(172, 172, 172);
+        border-image: initial;
+        border-bottom-style: solid;
+        border-bottom-color: rgb(82, 209, 145);
+        border-top-style: initial;
+        border-top-color: initial;
+      }
+      .select-item {
+        cursor: pointer;
+        padding: 8px 20px;
+        outline: rgb(201, 201, 201) none;
+        color: rgb(0, 0, 0);
+      }
+      .select-item.selected .select-item-text {
+        position: relative;
+        display: inline-block;
+      }
+      .select-item.selected .select-item-text::before {
+        content: "";
+        left: 0px;
+        width: 100%;
+        height: 1px;
+        bottom: 2px;
+        position: absolute;
+        transition: width 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) 0s;
+        background: black;
+      }
+      .select.expanded .select-items {
+        display: block;
+      }
+
       .checkbox {
         cursor: pointer;
         font-size: 13px;
@@ -17,17 +140,14 @@
         display: inline-flex;
         margin: 1rem 0 2rem;
       }
-
       .checkbox-inner {
         display: flex;
       }
-
       .checkbox-icon {
         margin-right: 10px;
         height: 17px;
         outline: none;
       }
-
       .checkbox-icon svg {
         width: 17px;
         height: 17px;
@@ -35,7 +155,6 @@
       .checkbox-icon svg:nth-child(2) {
         display: none;
       }
-
       .checkbox.selected .checkbox-icon svg {
         display: none;
       }
@@ -63,42 +182,80 @@
         </p>
         <div data-app>
           <div class="v-application">
-            <div>
-              <div class="d-flex">
-                <v-select :items="['Foo', 'Bar', 'Fizz', 'Buzz']" label="Type"></v-select>
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-icon color="primary" dark v-bind="attrs" v-on="on"> mdi-help-circle </v-icon>
-                  </template>
-                  <span>Tooltip text</span>
-                </v-tooltip>
-              </div>
-              <div>
-                <v-menu
-                  ref="menu"
-                  v-model="menu"
-                  :close-on-content-click="false"
-                  :return-value.sync="date"
-                  transition="scale-transition"
-                  offset-y
-                  min-width="auto"
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-text-field
-                      v-model="date"
-                      label="Date"
-                      prepend-icon="mdi-calendar"
-                      readonly
-                      v-bind="attrs"
-                      v-on="on"
-                    ></v-text-field>
-                  </template>
-                  <v-date-picker v-model="date" no-title scrollable>
-                    <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="menu = false"> Cancel </v-btn>
-                    <v-btn text color="primary" @click="$refs.menu.save(date)"> OK </v-btn>
-                  </v-date-picker>
-                </v-menu>
+            <div class="d-flex">
+              <v-menu
+                ref="menu"
+                v-model="menu"
+                :close-on-content-click="false"
+                :return-value.sync="date"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="date"
+                    label="Date"
+                    prepend-icon="mdi-calendar"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="date" no-title scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn text color="primary" @click="menu = false"> Cancel </v-btn>
+                  <v-btn text color="primary" @click="$refs.menu.save(date)"> OK </v-btn>
+                </v-date-picker>
+              </v-menu>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="primary" dark v-bind="attrs" v-on="on"> mdi-help-circle </v-icon>
+                </template>
+                <span>Tooltip text</span>
+              </v-tooltip>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="select">
+            <div class="select-wrapper">
+              <div class="select-inner">
+                <div class="select-field">
+                  <div class="select-field-wrapper">
+                    <div class="select-field-inner">
+                      <input
+                        type="text"
+                        name="country"
+                        autocomplete="off"
+                        autocapitalize="none"
+                        spellcheck="false"
+                        readonly=""
+                        class="select-field-input"
+                        value="Schweiz"
+                      />
+                      <div class="select-field-label">Land</div>
+                      <span class="select-field-icon">
+                        <span class="select-field-icon-inner">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.98 27.42">
+                            <path
+                              d="M23.49 26.745L.255 3.51A2.274 2.274 0 010 3.255l3.53-3 21.64 21.31L46.725.255A2.274 2.274 0 0146.98 0l3 3.53-23.235 23.235a2.324 2.324 0 01-3.255-.02z"
+                            ></path>
+                          </svg>
+                        </span>
+                        <p></p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <ul class="select-items">
+                  <li tabindex="1" class="select-item selected"><span class="select-item-text">Schweiz</span></li>
+                  <li tabindex="1" class="select-item"><span class="select-item-text">Liechtenstein</span></li>
+                  <li tabindex="1" class="select-item"><span class="select-item-text">Deutschland</span></li>
+                  <li tabindex="1" class="select-item"><span class="select-item-text">Österreich</span></li>
+                  <li tabindex="1" class="select-item"><span class="select-item-text">Italien</span></li>
+                  <li tabindex="1" class="select-item"><span class="select-item-text">Frankreich</span></li>
+                </ul>
               </div>
             </div>
           </div>
@@ -106,7 +263,7 @@
         <div>
           <div class="checkbox">
             <div class="checkbox-inner">
-              <span class="checkbox-icon" size="large" tabindex="0">
+              <span class="checkbox-icon" tabindex="0">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 85">
                   <path d="M85 85H0V0h85zM4.736 80.132l75.478.214V4.887L4.736 4.673z"></path>
                 </svg>
@@ -130,7 +287,8 @@
       <ul>
         <li><code>label</code> tags omitted or hidden.</li>
         <li>Required fields not properly marked.</li>
-        <li>Inaccessible select, tooltip and datepicker widgets from UI framework.</li>
+        <li>Inaccessible datepicker widget from UI framework.</li>
+        <li>Inaccessible styled select and checkbox.</li>
         <li>Unnoticed insertion of error message.</li>
         <li>No connection of error messages to invalid fields.</li>
       </ul>
@@ -146,6 +304,30 @@
     <script>
       (function () {
         "use strict";
+
+        // Select
+        var select = document.querySelector(".select"),
+          selectField = select.querySelector(".select-field-input"),
+          selectItems = select.querySelectorAll(".select-item");
+
+        [].forEach.call(selectItems, function (clickedItem, clickedIndex) {
+          clickedItem.addEventListener("click", function (event) {
+            selectField.value = event.currentTarget.textContent;
+
+            [].forEach.call(selectItems, function (item, index) {
+              item.classList.toggle("selected", clickedIndex === index);
+            });
+          });
+        });
+
+        selectField.addEventListener("focus", function () {
+          select.classList.add("expanded");
+        });
+        selectField.addEventListener("blur", function () {
+          setTimeout(function () {
+            select.classList.remove("expanded");
+          }, 250);
+        });
 
         // Checkbox
         document.querySelector(".checkbox").addEventListener("click", function (event) {

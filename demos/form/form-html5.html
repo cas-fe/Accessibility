@@ -6,6 +6,45 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Accessibility</title>
     <link href="../../dist/index.css" rel="stylesheet" />
+    <style>
+      .select {
+        position: relative;
+      }
+      .select label {
+        position: absolute;
+        left: 20px;
+        top: 8px;
+        font-size: 11px;
+        color: rgb(172, 172, 172);
+      }
+      .select select {
+        border: 1px solid rgb(201, 201, 201);
+        height: 58px;
+        padding: 24px 15px 10px 15px;
+      }
+
+      .checkbox {
+        display: flex;
+      }
+      .checkbox input {
+        appearance: none;
+        margin-left: 0;
+        margin-right: 10px;
+        width: 17px;
+        height: 17px;
+        border: 1px solid black;
+        position: relative;
+      }
+      .checkbox input:checked::before {
+        position: absolute;
+        content: "";
+        width: 11px;
+        height: 11px;
+        top: 2px;
+        left: 2px;
+        background: black;
+      }
+    </style>
   </head>
   <body>
     <header role="banner">
@@ -28,17 +67,23 @@
           <input id="email" name="email" required="" type="email" />
         </p>
         <p>
-          <label for="type">Type</label>
-          <select id="type" name="type">
-            <option>Foo</option>
-            <option>Bar</option>
-            <option>Fizz</option>
-            <option>Buzz</option>
+          <label for="date">Date (Tooltip text)</label>
+          <input id="date" name="date" type="date" />
+        </p>
+        <p class="select">
+          <label for="country">Land</label>
+          <select id="country" name="country">
+            <option>Schweiz</option>
+            <option>Liechtenstein</option>
+            <option>Deutschland</option>
+            <option>Österreich</option>
+            <option>Italien</option>
+            <option>Frankreich</option>
           </select>
         </p>
-        <p>
-          <label for="date">Date</label>
-          <input id="date" name="date" type="date" />
+        <p class="checkbox">
+          <input id="terms" name="terms" type="checkbox" />
+          <label for="terms">AGB gelesen</label>
         </p>
         <p>
           <input type="submit" value="Submit" />
