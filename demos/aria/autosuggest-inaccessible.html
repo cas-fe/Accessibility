@@ -45,7 +45,7 @@
         "use strict";
 
         function submitRequest(query, field, container) {
-          fetch("/data/suggestions.json?" + query)
+          fetch("../../data/suggestions.json?" + query)
             .then(function (response) {
               return response.json();
             })
