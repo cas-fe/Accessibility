@@ -1860,7 +1860,7 @@
 	    }
 	  },
 	  render: function render(h) {
-	    return h(_transitions__WEBPACK_IMPORTED_MODULE_4__["VExpandTransition"], [h('div', this.setBackgroundColor(this.color, {
+	    var data = {
 	      staticClass: 'v-banner',
 	      attrs: this.attrs$,
 	      class: this.classes,
@@ -1869,7 +1869,8 @@
 	        name: 'show',
 	        value: this.isActive
 	      }]
-	    }), [this.genWrapper()])]);
+	    };
+	    return h(_transitions__WEBPACK_IMPORTED_MODULE_4__["VExpandTransition"], [h('div', this.outlined ? data : this.setBackgroundColor(this.color, data), [this.genWrapper()])]);
 	  }
 	}));
 
@@ -2112,10 +2113,7 @@
 	  name: 'v-bottom-sheet',
 	  props: {
 	    inset: Boolean,
-	    maxWidth: {
-	      type: [String, Number],
-	      default: 'auto'
-	    },
+	    maxWidth: [String, Number],
 	    transition: {
 	      type: String,
 	      default: 'bottom-sheet-transition'
@@ -3511,8 +3509,10 @@
 	        key: day.date,
 	        staticClass: 'v-calendar-daily_head-day',
 	        class: this.getRelativeClasses(day),
-	        on: this.getDefaultMouseEventHandlers(':day', function (_e) {
-	          return _this.getSlotScope(day);
+	        on: this.getDefaultMouseEventHandlers(':day', function (nativeEvent) {
+	          return __assign({
+	            nativeEvent: nativeEvent
+	          }, _this.getSlotScope(day));
 	        })
 	      }, __spread([this.genHeadWeekday(day), this.genHeadDayLabel(day)], this.genDayHeader(day, index)));
 	    },
@@ -3557,8 +3557,10 @@
 	            prevent: true,
 	            result: false
 	          }
-	        }, function (_e) {
-	          return day;
+	        }, function (nativeEvent) {
+	          return __assign({
+	            nativeEvent: nativeEvent
+	          }, day);
 	        })
 	      }, this.dayFormatter(day, false));
 	    },
@@ -3597,8 +3599,10 @@
 	        key: day.date,
 	        staticClass: 'v-calendar-daily__day',
 	        class: this.getRelativeClasses(day),
-	        on: this.getDefaultMouseEventHandlers(':time', function (e) {
-	          return _this.getSlotScope(_this.getTimestampAtEvent(e, day));
+	        on: this.getDefaultMouseEventHandlers(':time', function (nativeEvent) {
+	          return __assign({
+	            nativeEvent: nativeEvent
+	          }, _this.getSlotScope(_this.getTimestampAtEvent(nativeEvent, day)));
 	        })
 	      }, __spread(this.genDayIntervals(index), this.genDayBody(day)));
 	    },
@@ -3638,8 +3642,10 @@
 	        style: {
 	          width: width
 	        },
-	        on: this.getDefaultMouseEventHandlers(':interval', function (e) {
-	          return _this.getTimestampAtEvent(e, _this.parsedStart);
+	        on: this.getDefaultMouseEventHandlers(':interval', function (nativeEvent) {
+	          return __assign({
+	            nativeEvent: nativeEvent
+	          }, _this.getTimestampAtEvent(nativeEvent, _this.parsedStart));
 	        })
 	      };
 	      return this.$createElement('div', data, this.genIntervalLabels());
@@ -3924,8 +3930,10 @@
 	        key: day.date,
 	        staticClass: 'v-calendar-weekly__day',
 	        class: this.getRelativeClasses(day, outside),
-	        on: this.getDefaultMouseEventHandlers(':day', function (_e) {
-	          return day;
+	        on: this.getDefaultMouseEventHandlers(':day', function (nativeEvent) {
+	          return __assign({
+	            nativeEvent: nativeEvent
+	          }, day);
 	        })
 	      }, __spread([this.genDayLabel(day)], Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__["getSlot"])(this, 'day', function () {
 	        return __assign({
@@ -3961,8 +3969,10 @@
 	            prevent: true,
 	            result: false
 	          }
-	        }, function (_e) {
-	          return day;
+	        }, function (nativeEvent) {
+	          return __assign({
+	            nativeEvent: nativeEvent
+	          }, day);
 	        })
 	      }, hasMonth ? this.monthFormatter(day, this.shortMonths) + ' ' + this.dayFormatter(day, false) : this.dayFormatter(day, false));
 	    },
@@ -4523,8 +4533,6 @@
 	      });
 	    },
 	    genMore: function genMore(day) {
-	      var _this = this;
-
 	      var _a;
 
 	      var eventHeight = this.eventHeight;
@@ -4542,11 +4550,11 @@
 	          name: 'ripple',
 	          value: (_a = this.eventRipple) !== null && _a !== void 0 ? _a : true
 	        }],
-	        on: {
-	          click: function click(e) {
-	            return _this.$emit('click:more', day, e);
-	          }
-	        },
+	        on: this.getDefaultMouseEventHandlers(':more', function (nativeEvent) {
+	          return __assign({
+	            nativeEvent: nativeEvent
+	          }, day);
+	        }),
 	        style: {
 	          display: 'none',
 	          height: eventHeight + "px",
@@ -4920,9 +4928,18 @@
 
 
 	            if (e && 'touches' in e) {
-	              var currentTarget = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+	              var classSeparator_1 = ' ';
+	              var eventTargetClasses_1 = (_a = e.currentTarget) === null || _a === void 0 ? void 0 : _a.className.split(classSeparator_1);
+	              var currentTargets = document.elementsFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY); // Get "the same kind" current hovering target by checking
+	              // If element has the same class of initial touch start element (which has touch event listener registered)
 
-	              if (currentTarget && !((_a = e.target) === null || _a === void 0 ? void 0 : _a.isSameNode(currentTarget)) && ((_b = e.target) === null || _b === void 0 ? void 0 : _b.className) === currentTarget.className) {
+	              var currentTarget = currentTargets.find(function (t) {
+	                return t.className.split(classSeparator_1).some(function (c) {
+	                  return eventTargetClasses_1.includes(c);
+	                });
+	              });
+
+	              if (currentTarget && !((_b = e.target) === null || _b === void 0 ? void 0 : _b.isSameNode(currentTarget))) {
 	                currentTarget.dispatchEvent(new TouchEvent(e.type, {
 	                  changedTouches: e.changedTouches,
 	                  targetTouches: e.targetTouches,
@@ -10612,8 +10629,8 @@
 	      var children = [];
 	      var value = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_1__["getObjectValueByPath"])(props.item, header.value);
 	      var slotName = header.value;
-	      var scopedSlot = data.scopedSlots && data.scopedSlots[slotName];
-	      var regularSlot = computedSlots[slotName];
+	      var scopedSlot = data.scopedSlots && data.scopedSlots.hasOwnProperty(slotName) && data.scopedSlots[slotName];
+	      var regularSlot = computedSlots.hasOwnProperty(slotName) && computedSlots[slotName];
 
 	      if (scopedSlot) {
 	        children.push(scopedSlot({
@@ -10725,8 +10742,8 @@
 	      var children = [];
 	      var value = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_1__["getObjectValueByPath"])(props.item, header.value);
 	      var slotName = header.value;
-	      var scopedSlot = data.scopedSlots && data.scopedSlots[slotName];
-	      var regularSlot = computedSlots[slotName];
+	      var scopedSlot = data.scopedSlots && data.scopedSlots.hasOwnProperty(slotName) && data.scopedSlots[slotName];
+	      var regularSlot = computedSlots.hasOwnProperty(slotName) && computedSlots[slotName];
 
 	      if (scopedSlot) {
 	        children.push.apply(children, __spread(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_1__["wrapInArray"])(scopedSlot({
@@ -11796,7 +11813,7 @@
 	        return this.$createElement('th', data, [this.genSelectAll()]);
 	      }
 
-	      children.push(this.$scopedSlots[header.value] ? this.$scopedSlots[header.value]({
+	      children.push(this.$scopedSlots.hasOwnProperty(header.value) ? this.$scopedSlots[header.value]({
 	        header: header
 	      }) : this.$createElement('span', [header.text]));
 
@@ -14568,10 +14585,7 @@
 	    disabled: Boolean,
 	    fullscreen: Boolean,
 	    light: Boolean,
-	    maxWidth: {
-	      type: [String, Number],
-	      default: 'none'
-	    },
+	    maxWidth: [String, Number],
 	    noClickAnimation: Boolean,
 	    origin: {
 	      type: String,
@@ -14587,10 +14601,7 @@
 	      type: [String, Boolean],
 	      default: 'dialog-transition'
 	    },
-	    width: {
-	      type: [String, Number],
-	      default: 'auto'
-	    }
+	    width: [String, Number]
 	  },
 	  data: function data() {
 	    return {
@@ -14820,8 +14831,8 @@
 
 	      if (!this.fullscreen) {
 	        data.style = __assign(__assign({}, data.style), {
-	          maxWidth: this.maxWidth === 'none' ? undefined : Object(_util_helpers__WEBPACK_IMPORTED_MODULE_12__["convertToUnit"])(this.maxWidth),
-	          width: this.width === 'auto' ? undefined : Object(_util_helpers__WEBPACK_IMPORTED_MODULE_12__["convertToUnit"])(this.width)
+	          maxWidth: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_12__["convertToUnit"])(this.maxWidth),
+	          width: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_12__["convertToUnit"])(this.width)
 	        });
 	      }
 
@@ -17837,10 +17848,11 @@
 	__webpack_require__.r(__webpack_exports__);
 	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseItemGroup", function() { return BaseItemGroup; });
 	/* harmony import */ __webpack_require__(/*! ./VItemGroup.sass */ "./src/components/VItemGroup/VItemGroup.sass");
-	/* harmony import */ var _mixins_proxyable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/proxyable */ "./src/mixins/proxyable/index.ts");
-	/* harmony import */ var _mixins_themeable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/themeable */ "./src/mixins/themeable/index.ts");
-	/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/mixins */ "./src/util/mixins.ts");
-	/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/console */ "./src/util/console.ts");
+	/* harmony import */ var _mixins_comparable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/comparable */ "./src/mixins/comparable/index.ts");
+	/* harmony import */ var _mixins_proxyable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/proxyable */ "./src/mixins/proxyable/index.ts");
+	/* harmony import */ var _mixins_themeable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/themeable */ "./src/mixins/themeable/index.ts");
+	/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/mixins */ "./src/util/mixins.ts");
+	/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../util/console */ "./src/util/console.ts");
 	var __assign = function () {
 	  __assign = Object.assign || function (t) {
 	    for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -17858,13 +17870,15 @@
 	}; // Styles
 
 
+	 // Mixins
+
 
 
 	 // Utilities
 
 
 
-	var BaseItemGroup = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_3__["default"])(_mixins_proxyable__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_themeable__WEBPACK_IMPORTED_MODULE_2__["default"]).extend({
+	var BaseItemGroup = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_4__["default"])(_mixins_comparable__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_proxyable__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_themeable__WEBPACK_IMPORTED_MODULE_3__["default"]).extend({
 	  name: 'base-item-group',
 	  props: {
 	    activeClass: {
@@ -17920,7 +17934,7 @@
 
 	      if (!this.multiple) {
 	        return function (v) {
-	          return _this.internalValue === v;
+	          return _this.valueComparator(_this.internalValue, v);
 	        };
 	      }
 
@@ -17928,7 +17942,9 @@
 
 	      if (Array.isArray(internalValue)) {
 	        return function (v) {
-	          return internalValue.includes(v);
+	          return internalValue.some(function (intern) {
+	            return _this.valueComparator(intern, v);
+	          });
 	        };
 	      }
 
@@ -17943,7 +17959,7 @@
 	  },
 	  created: function created() {
 	    if (this.multiple && !Array.isArray(this.internalValue)) {
-	      Object(_util_console__WEBPACK_IMPORTED_MODULE_4__["consoleWarn"])('Model must be bound to an array if the multiple property is true.', this);
+	      Object(_util_console__WEBPACK_IMPORTED_MODULE_5__["consoleWarn"])('Model must be bound to an array if the multiple property is true.', this);
 	    }
 	  },
 	  methods: {
@@ -17953,7 +17969,7 @@
 	      };
 	    },
 	    getValue: function getValue(item, i) {
-	      return item.value == null || item.value === '' ? i : item.value;
+	      return item.value === undefined ? i : item.value;
 	    },
 	    onClick: function onClick(item) {
 	      this.updateInternalValue(this.getValue(item, this.items.indexOf(item)));
@@ -22352,8 +22368,7 @@
 	/* harmony import */ __webpack_require__(/*! ./VRadioGroup.sass */ "./src/components/VRadioGroup/VRadioGroup.sass");
 	/* harmony import */ var _VInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../VInput */ "./src/components/VInput/index.ts");
 	/* harmony import */ var _VItemGroup_VItemGroup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../VItemGroup/VItemGroup */ "./src/components/VItemGroup/VItemGroup.ts");
-	/* harmony import */ var _mixins_comparable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../mixins/comparable */ "./src/mixins/comparable/index.ts");
-	/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../util/mixins */ "./src/util/mixins.ts");
+	/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/mixins */ "./src/util/mixins.ts");
 	var __assign = function () {
 	  __assign = Object.assign || function (t) {
 	    for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -22375,12 +22390,10 @@
 	 // Extensions
 
 
-	 // Mixins
-
 	 // Types
 
 
-	var baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_5__["default"])(_mixins_comparable__WEBPACK_IMPORTED_MODULE_4__["default"], _VItemGroup_VItemGroup__WEBPACK_IMPORTED_MODULE_3__["BaseItemGroup"], _VInput__WEBPACK_IMPORTED_MODULE_2__["default"]);
+	var baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_4__["default"])(_VItemGroup_VItemGroup__WEBPACK_IMPORTED_MODULE_3__["BaseItemGroup"], _VInput__WEBPACK_IMPORTED_MODULE_2__["default"]);
 	/* @vue/component */
 
 	/* harmony default export */ __webpack_exports__["default"] = (baseMixins.extend({
@@ -27765,7 +27778,8 @@
 	      }), this.groupClasses);
 	    },
 	    value: function value() {
-	      var to = this.to || this.href || '';
+	      var to = this.to || this.href;
+	      if (to == null) return to;
 
 	      if (this.$router && this.to === Object(this.to)) {
 	        var resolve = this.$router.resolve(this.to, this.$route, this.append);
@@ -27795,7 +27809,7 @@
 	    },
 	    toggle: function toggle() {
 	      // VItemGroup treats a change event as a click
-	      if (!this.isActive) {
+	      if (!this.isActive || !this.tabsBar.mandatory && !this.to) {
 	        this.$emit('change');
 	      }
 	    }
@@ -33797,10 +33811,6 @@
 	  el.style.webkitTransform = value;
 	}
 
-	function opacity(el, value) {
-	  el.style.opacity = value.toString();
-	}
-
 	function isTouchEvent(e) {
 	  return e.constructor.name === 'TouchEvent';
 	}
@@ -33892,13 +33902,11 @@
 	    animation.classList.add('v-ripple__animation--enter');
 	    animation.classList.add('v-ripple__animation--visible');
 	    transform(animation, "translate(" + x + ", " + y + ") scale3d(" + scale + "," + scale + "," + scale + ")");
-	    opacity(animation, 0);
 	    animation.dataset.activated = String(performance.now());
 	    setTimeout(function () {
 	      animation.classList.remove('v-ripple__animation--enter');
 	      animation.classList.add('v-ripple__animation--in');
 	      transform(animation, "translate(" + centerX + ", " + centerY + ") scale3d(1,1,1)");
-	      opacity(animation, 0.25);
 	    }, 0);
 	  },
 	  hide: function hide(el) {
@@ -33912,7 +33920,6 @@
 	    setTimeout(function () {
 	      animation.classList.remove('v-ripple__animation--in');
 	      animation.classList.add('v-ripple__animation--out');
-	      opacity(animation, 0);
 	      setTimeout(function () {
 	        var ripples = el.getElementsByClassName('v-ripple__animation');
 
@@ -34369,7 +34376,7 @@
 
 	  Vuetify.install = _install__WEBPACK_IMPORTED_MODULE_0__["install"];
 	  Vuetify.installed = false;
-	  Vuetify.version = "2.6.0";
+	  Vuetify.version = "2.6.1";
 	  Vuetify.config = {
 	    silent: false
 	  };
@@ -36302,8 +36309,8 @@
 	    itemsPerPageAll: 'Tutti',
 	    nextPage: 'Pagina seguente',
 	    prevPage: 'Pagina precedente',
-	    firstPage: 'Pagina prima',
-	    lastPage: 'Pagina ultima',
+	    firstPage: 'Prima pagina',
+	    lastPage: 'Ultima pagina',
 	    pageText: '{0}-{1} di {2}'
 	  },
 	  datePicker: {
@@ -36318,15 +36325,15 @@
 	    prev: 'Vista precedente',
 	    next: 'Prossima vista',
 	    ariaLabel: {
-	      delimiter: 'Carousel slide {0} of {1}'
+	      delimiter: 'Carousel slide {0} di {1}'
 	    }
 	  },
 	  calendar: {
 	    moreEvents: '{0} di più'
 	  },
 	  fileInput: {
-	    counter: '{0} files',
-	    counterSize: '{0} files ({1} in totale)'
+	    counter: '{0} file',
+	    counterSize: '{0} file ({1} in totale)'
 	  },
 	  timePicker: {
 	    am: 'AM',
@@ -36343,7 +36350,7 @@
 	  },
 	  rating: {
 	    ariaLabel: {
-	      icon: 'Rating {0} of {1}'
+	      icon: 'Valutazione {0} di {1}'
 	    }
 	  }
 	});
@@ -40507,9 +40514,6 @@
 	    this.onRouteChange();
 	  },
 	  methods: {
-	    click: function click(e) {
-	      this.$emit('click', e);
-	    },
 	    generateRouteLink: function generateRouteLink() {
 	      var _a;
 
@@ -40526,9 +40530,9 @@
 	          name: 'ripple',
 	          value: this.computedRipple
 	        }]
-	      }, _a[this.to ? 'nativeOn' : 'on'] = __assign(__assign({}, this.$listeners), {
+	      }, _a[this.to ? 'nativeOn' : 'on'] = __assign(__assign({}, this.$listeners), 'click' in this ? {
 	        click: this.click
-	      }), _a.ref = 'link', _a);
+	      } : undefined), _a.ref = 'link', _a);
 
 	      if (typeof this.exact === 'undefined') {
 	        exact = this.to === '/' || this.to === Object(this.to) && this.to.path === '/';
@@ -44891,12 +44895,12 @@
 	 */
 
 	function getSlotType(vm, name, split) {
-	  if (vm.$slots[name] && vm.$scopedSlots[name] && vm.$scopedSlots[name].name) {
+	  if (vm.$slots.hasOwnProperty(name) && vm.$scopedSlots.hasOwnProperty(name) && vm.$scopedSlots[name].name) {
 	    return split ? 'v-slot' : 'scoped';
 	  }
 
-	  if (vm.$slots[name]) return 'normal';
-	  if (vm.$scopedSlots[name]) return 'scoped';
+	  if (vm.$slots.hasOwnProperty(name)) return 'normal';
+	  if (vm.$scopedSlots.hasOwnProperty(name)) return 'scoped';
 	}
 	function debounce(fn, delay) {
 	  var timeoutId = 0;
@@ -44948,9 +44952,9 @@
 	    optional = false;
 	  }
 
-	  if (vm.$scopedSlots[name]) {
+	  if (vm.$scopedSlots.hasOwnProperty(name)) {
 	    return vm.$scopedSlots[name](data instanceof Function ? data() : data);
-	  } else if (vm.$slots[name] && (!data || optional)) {
+	  } else if (vm.$slots.hasOwnProperty(name) && (!data || optional)) {
 	    return vm.$slots[name];
 	  }
 
