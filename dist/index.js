@@ -10,7 +10,7 @@
 
 	/* global NodeList, Element, Event, define */
 
-	createCommonjsModule(function (module) {
+	var a11yDialog = createCommonjsModule(function (module) {
 	(function (global) {
 
 	  var FOCUSABLE_ELEMENTS = [
@@ -810,6 +810,8 @@
 
 	})));
 	});
+
+	window.A11yDialog = a11yDialog;
 
 	// TODO: Beautify
 	!(function () {
