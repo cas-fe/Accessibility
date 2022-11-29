@@ -7,8 +7,7 @@
     <title>Accessibility</title>
     <link href="../../dist/index.css" rel="stylesheet" />
     <link
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      media="all"
+     href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.min.css"
       rel="stylesheet"
       type="text/css"
     />
@@ -18,15 +17,19 @@
       <h1>Accessible images and icons</h1>
     </header>
     <main role="main">
+      <h2>Image</h2>
       <p>
-        Image:<br /><img
+        <img
           src="../../data/banana.png"
           alt="Screenshot of JavaScript code concatenating 'b', 'a', 'a' and 'a' to 'banana' due to unary operator inserting 'Nan'"
         />
       </p>
-      <p>Icon link: <a href="#" aria-label="Shopping cart">
-        <span class="fa fa-shopping-cart" role="presentation" aria-hidden="true"></span>
-      </a></p>
+      <h2>Icon link</h2>
+      <p>
+        <a href="#" aria-label="Trailer">
+          <span class="fa fa-trailer" role="presentation" aria-hidden="true"></span>
+        </a>
+      </p>
     </main>
     <hr />
     <a class="js-toggle" href="#fixes">Show fixes and notes</a>
