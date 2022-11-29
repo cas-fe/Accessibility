@@ -61,7 +61,8 @@
         z-index: 1;
       }
       .tooltip:hover span,
-      .tooltip.visible span {
+      .tooltip.visible span,
+      input:focus ~ .tooltip:not(.dismissed) span {
         /* Reset visually hidden styles */
         clip: auto;
         height: auto;
@@ -264,6 +265,20 @@
           },
           false
         );
+
+        // Close tooltip on `esc`
+        [].forEach.call(form.querySelectorAll(".tooltip"), function (tooltip) {
+          var id = tooltip.getAttribute("id"),
+            field = form.querySelector('[aria-describedby~="' + id + '"]');
+
+          if (field) {
+            field.addEventListener("keydown", function (event) {
+              if (event.keyCode === 27) {
+                tooltip.classList.add('dismissed');
+              }
+            });
+          }
+        });
       })();
     </script>
   </body>
