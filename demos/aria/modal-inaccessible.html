@@ -35,29 +35,27 @@
     </header>
     <main role="main">
       <p>
-        Lorem ipsum dolor sit amet, <a href="#modal" class="link">Open modal</a> consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-        qui officia deserunt mollit anim id est laborum.
+        The Master of Science in Engineering (MSE) enables students to specialise in specific areas of
+        <a href="#modal" class="modal-link">technical sciences</a>, information technology, and construction and
+        planning. OST offers this consecutive master's program, which is unique in Switzerland, in collaboration with
+        all Swiss universities of applied sciences. Choose from 11 profiles.
       </p>
 
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href="#">link</a>, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-        anim id est laborum.
+        The master's program is targeted towards subject-specific, project-oriented specialisation. Within the framework
+        of your chosen profile, you will <a href="#">complete projects</a>, take supplementary lessons and write a
+        master's thesis at OST. These profiles are linked to the application-oriented research and development that is
+        carried out at OST. You thereby acquire the very latest scientific knowledge, gain an application-oriented
+        understanding of individual subjects and the broader field of science, and can major in a specific area.
       </p>
 
       <div id="modal" class="modal">
-        <h1>Modal title</h1>
+        <h1>Technical sciences</h1>
         <p>
-          Lorem ipsum dolor sit amet <a href="#">link</a>, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-          eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-          mollit anim id est laborum.
+          Engineers are in demand. Human labor is being replaced by modern, sophisticated machines and equipment in
+          nearly all areas of life. Thanks to the excellent research at OST and its direct integration into our courses,
+          you will become familiar with the latest technologies and <a href="#">trends</a> and can start applying your
+          knowledge to real world situations immediately after completing your studies.
         </p>
         <button type="button" class="close">Close</button>
       </div>
@@ -90,7 +88,7 @@
           modal.classList.remove("is-visible");
         }
 
-        [].forEach.call(document.querySelectorAll(".link"), function (link) {
+        [].forEach.call(document.querySelectorAll(".modal-link"), function (link) {
           var target = link.getAttribute("href"),
             modal = document.querySelector(target),
             close = modal.querySelector(".close");
