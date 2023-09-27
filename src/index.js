@@ -1,8 +1,5 @@
 import "./index.css";
-import A11yDialog from "a11y-dialog";
 import "focus-visible";
-
-window.A11yDialog = A11yDialog;
 
 // TODO: Beautify
 !(function () {

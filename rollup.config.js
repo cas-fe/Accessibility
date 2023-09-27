@@ -21,6 +21,17 @@ export default [
     ],
   },
   {
+    input: "src/dialog.js",
+    output: {
+      dir: "dist",
+      format: "iife",
+    },
+    plugins: [
+      nodeResolve(),
+      commonjs(),
+    ],
+  },
+  {
     input: "src/vuetify.js",
     output: {
       dir: "dist",
