@@ -1,5 +1,4 @@
 import "./index.css";
-import "focus-visible";
 
 // TODO: Beautify
 !(function () {

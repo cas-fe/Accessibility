@@ -29,10 +29,6 @@
       .demo *:focus:not(:focus-visible) {
         outline: none;
       }
-      /* Fallback for polyfilled browsers */
-      .js-focus-visible .demo *:focus:not(.focus-visible) {
-        outline: none;
-      }
     </style>
   </head>
   <body>
@@ -57,7 +53,6 @@
       <h2>Fixes</h2>
       <ul>
         <li>Using <code>:focus-visible</code> pseudo-class to decide whether to remove outline.</li>
-        <li><a href="https://github.com/WICG/focus-visible">Polyfilled</a> as <a href="https://blogs.igalia.com/mrego/2021/06/07/focus-visible-in-webkit-may-2021/">Safari support</a> has not yet been released.</li>
       </ul>
       <div class="notes">
         <h2>Notes</h2>
@@ -67,6 +62,10 @@
             <a href="https://www.w3.org/WAI/WCAG21/quickref/#qr-navigation-mechanisms-focus-visible"
               >2.4.7 Focus Visible</a
             >.
+          </li>
+          <li>
+            <code>:focus-visible</code> could be <a href="https://github.com/WICG/focus-visible">polyfilled</a>
+            for older browsers.
           </li>
         </ul>
       </div>
