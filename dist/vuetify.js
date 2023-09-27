@@ -460,7 +460,7 @@
 	  },
 	  beforeCreate: function beforeCreate() {
 	    if (!this.$vuetify || this.$vuetify === this.$root) {
-	      throw new Error('Vuetify is not properly initialized, see https://vuetifyjs.com/getting-started/quick-start#bootstrapping-the-vuetify-object');
+	      throw new Error('Vuetify is not properly initialized, see https://v2.vuetifyjs.com/getting-started/quick-start#bootstrapping-the-vuetify-object');
 	    }
 	  },
 	  render: function render(h) {
@@ -975,10 +975,6 @@
 	/* harmony default export */ __webpack_exports__["default"] = (_VSelect_VSelect__WEBPACK_IMPORTED_MODULE_1__["default"].extend({
 	  name: 'v-autocomplete',
 	  props: {
-	    allowOverflow: {
-	      type: Boolean,
-	      default: true
-	    },
 	    autoSelectFirst: {
 	      type: Boolean,
 	      default: false
@@ -4077,7 +4073,7 @@
 	/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../util/mixins */ "./src/util/mixins.ts");
 	/* harmony import */ var _mixins_colorable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../mixins/colorable */ "./src/mixins/colorable/index.ts");
 	/* harmony import */ var _mixins_localable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../mixins/localable */ "./src/mixins/localable/index.ts");
-	/* harmony import */ var _mouse__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mouse */ "./src/components/VCalendar/mixins/mouse.ts");
+	/* harmony import */ var _mixins_mouse__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../mixins/mouse */ "./src/mixins/mouse/index.ts");
 	/* harmony import */ var _mixins_themeable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../mixins/themeable */ "./src/mixins/themeable/index.ts");
 	/* harmony import */ var _times__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./times */ "./src/components/VCalendar/mixins/times.ts");
 	/* harmony import */ var _directives_resize__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../directives/resize */ "./src/directives/resize/index.ts");
@@ -4095,7 +4091,7 @@
 
 
 
-	/* harmony default export */ __webpack_exports__["default"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_0__["default"])(_mixins_colorable__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_localable__WEBPACK_IMPORTED_MODULE_2__["default"], _mouse__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_themeable__WEBPACK_IMPORTED_MODULE_4__["default"], _times__WEBPACK_IMPORTED_MODULE_5__["default"]
+	/* harmony default export */ __webpack_exports__["default"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_0__["default"])(_mixins_colorable__WEBPACK_IMPORTED_MODULE_1__["default"], _mixins_localable__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_mouse__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_themeable__WEBPACK_IMPORTED_MODULE_4__["default"], _times__WEBPACK_IMPORTED_MODULE_5__["default"]
 	/* @vue/component */
 	).extend({
 	  name: 'calendar-base',
@@ -4878,135 +4874,6 @@
 	      var min = this.firstMinute;
 	      var gap = this.parsedIntervalCount * this.parsedIntervalMinutes;
 	      return (minutes - min) / gap;
-	    }
-	  }
-	}));
-
-	/***/ }),
-
-	/***/ "./src/components/VCalendar/mixins/mouse.ts":
-	/*!**************************************************!*\
-	  !*** ./src/components/VCalendar/mixins/mouse.ts ***!
-	  \**************************************************/
-	/*! exports provided: default */
-	/***/ (function(module, __webpack_exports__, __webpack_require__) {
-	__webpack_require__.r(__webpack_exports__);
-	/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
-	/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-	var __assign = function () {
-	  __assign = Object.assign || function (t) {
-	    for (var s, i = 1, n = arguments.length; i < n; i++) {
-	      s = arguments[i];
-
-	      for (var p in s) {
-	        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-	      }
-	    }
-
-	    return t;
-	  };
-
-	  return __assign.apply(this, arguments);
-	};
-
-
-	/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend({
-	  name: 'mouse',
-	  methods: {
-	    getDefaultMouseEventHandlers: function getDefaultMouseEventHandlers(suffix, getEvent) {
-	      var _a;
-
-	      var listeners = Object.keys(this.$listeners).filter(function (key) {
-	        return key.endsWith(suffix);
-	      }).reduce(function (acc, key) {
-	        acc[key] = {
-	          event: key.slice(0, -suffix.length)
-	        };
-	        return acc;
-	      }, {});
-	      return this.getMouseEventHandlers(__assign(__assign({}, listeners), (_a = {}, _a['contextmenu' + suffix] = {
-	        event: 'contextmenu',
-	        prevent: true,
-	        result: false
-	      }, _a)), getEvent);
-	    },
-	    getMouseEventHandlers: function getMouseEventHandlers(events, getEvent) {
-	      var _this = this;
-
-	      var on = {};
-
-	      var _loop_1 = function _loop_1(event) {
-	        var eventOptions = events[event];
-	        if (!this_1.$listeners[event]) return "continue"; // TODO somehow pull in modifiers
-
-	        var prefix = eventOptions.passive ? '&' : (eventOptions.once ? '~' : '') + (eventOptions.capture ? '!' : '');
-	        var key = prefix + eventOptions.event;
-
-	        var handler = function handler(e) {
-	          var _a, _b;
-
-	          var mouseEvent = e;
-
-	          if (eventOptions.button === undefined || mouseEvent.buttons > 0 && mouseEvent.button === eventOptions.button) {
-	            if (eventOptions.prevent) {
-	              e.preventDefault();
-	            }
-
-	            if (eventOptions.stop) {
-	              e.stopPropagation();
-	            } // Due to TouchEvent target always returns the element that is first placed
-	            // Even if touch point has since moved outside the interactive area of that element
-	            // Ref: https://developer.mozilla.org/en-US/docs/Web/API/Touch/target
-	            // This block of code aims to make sure touchEvent is always dispatched from the element that is being pointed at
-
-
-	            if (e && 'touches' in e) {
-	              var classSeparator_1 = ' ';
-	              var eventTargetClasses_1 = (_a = e.currentTarget) === null || _a === void 0 ? void 0 : _a.className.split(classSeparator_1);
-	              var currentTargets = document.elementsFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY); // Get "the same kind" current hovering target by checking
-	              // If element has the same class of initial touch start element (which has touch event listener registered)
-
-	              var currentTarget = currentTargets.find(function (t) {
-	                return t.className.split(classSeparator_1).some(function (c) {
-	                  return eventTargetClasses_1.includes(c);
-	                });
-	              });
-
-	              if (currentTarget && !((_b = e.target) === null || _b === void 0 ? void 0 : _b.isSameNode(currentTarget))) {
-	                currentTarget.dispatchEvent(new TouchEvent(e.type, {
-	                  changedTouches: e.changedTouches,
-	                  targetTouches: e.targetTouches,
-	                  touches: e.touches
-	                }));
-	                return;
-	              }
-	            }
-
-	            _this.$emit(event, getEvent(e), e);
-	          }
-
-	          return eventOptions.result;
-	        };
-
-	        if (key in on) {
-	          /* istanbul ignore next */
-	          if (Array.isArray(on[key])) {
-	            on[key].push(handler);
-	          } else {
-	            on[key] = [on[key], handler];
-	          }
-	        } else {
-	          on[key] = handler;
-	        }
-	      };
-
-	      var this_1 = this;
-
-	      for (var event in events) {
-	        _loop_1(event);
-	      }
-
-	      return on;
 	    }
 	  }
 	}));
@@ -10345,12 +10212,12 @@
 	  },
 	  methods: {
 	    onKeyDown: function onKeyDown(e) {
-	      if (e.keyCode !== _util_helpers__WEBPACK_IMPORTED_MODULE_5__["keyCodes"].shift) return;
-	      this.shiftKeyDown = true;
+	      this.shiftKeyDown = e.keyCode === _util_helpers__WEBPACK_IMPORTED_MODULE_5__["keyCodes"].shift || e.shiftKey;
 	    },
 	    onKeyUp: function onKeyUp(e) {
-	      if (e.keyCode !== _util_helpers__WEBPACK_IMPORTED_MODULE_5__["keyCodes"].shift) return;
-	      this.shiftKeyDown = false;
+	      if (e.keyCode === _util_helpers__WEBPACK_IMPORTED_MODULE_5__["keyCodes"].shift || !e.shiftKey) {
+	        this.shiftKeyDown = false;
+	      }
 	    },
 	    toggleSelectAll: function toggleSelectAll(value) {
 	      var selection = Object.assign({}, this.selection);
@@ -10934,11 +10801,12 @@
 	/* harmony import */ var _VSimpleTable__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./VSimpleTable */ "./src/components/VDataTable/VSimpleTable.ts");
 	/* harmony import */ var _MobileRow__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./MobileRow */ "./src/components/VDataTable/MobileRow.ts");
 	/* harmony import */ var _mixins_loadable__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../mixins/loadable */ "./src/mixins/loadable/index.ts");
-	/* harmony import */ var _directives_ripple__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../directives/ripple */ "./src/directives/ripple/index.ts");
-	/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../util/mixins */ "./src/util/mixins.ts");
-	/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../util/helpers */ "./src/util/helpers.ts");
-	/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../util/console */ "./src/util/console.ts");
-	/* harmony import */ var _util_mergeData__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../util/mergeData */ "./src/util/mergeData.ts");
+	/* harmony import */ var _mixins_mouse__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../mixins/mouse */ "./src/mixins/mouse/index.ts");
+	/* harmony import */ var _directives_ripple__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../directives/ripple */ "./src/directives/ripple/index.ts");
+	/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../util/mixins */ "./src/util/mixins.ts");
+	/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../util/helpers */ "./src/util/helpers.ts");
+	/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../util/console */ "./src/util/console.ts");
+	/* harmony import */ var _util_mergeData__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../util/mergeData */ "./src/util/mergeData.ts");
 	function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 	var __assign = function () {
@@ -10998,6 +10866,7 @@
 
 	 // Mixins
 
+
 	 // Directives
 
 	 // Helpers
@@ -11009,31 +10878,48 @@
 
 	function filterFn(item, search, filter) {
 	  return function (header) {
-	    var value = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["getObjectValueByPath"])(item, header.value);
+	    var value = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getObjectValueByPath"])(item, header.value);
 	    return header.filter ? header.filter(value, search, item) : filter(value, search, item);
 	  };
 	}
 
-	function searchTableItems(items, search, headersWithCustomFilters, headersWithoutCustomFilters, customFilter) {
+	function searchTableItems(items, search, headersWithCustomFilters, headersWithoutCustomFilters, customFilter, filterMode) {
 	  search = typeof search === 'string' ? search.trim() : null;
-	  return items.filter(function (item) {
-	    // Headers with custom filters are evaluated whether or not a search term has been provided.
-	    // We need to match every filter to be included in the results.
-	    var matchesColumnFilters = headersWithCustomFilters.every(filterFn(item, search, _util_helpers__WEBPACK_IMPORTED_MODULE_14__["defaultFilter"])); // Headers without custom filters are only filtered by the `search` property if it is defined.
-	    // We only need a single column to match the search term to be included in the results.
 
-	    var matchesSearchTerm = !search || headersWithoutCustomFilters.some(filterFn(item, search, customFilter));
-	    return matchesColumnFilters && matchesSearchTerm;
-	  });
+	  if (filterMode === 'union') {
+	    // If the `search` property is empty and there are no custom filters in use, there is nothing to do.
+	    if (!(search && headersWithoutCustomFilters.length) && !headersWithCustomFilters.length) return items;
+	    return items.filter(function (item) {
+	      // Headers with custom filters are evaluated whether or not a search term has been provided.
+	      if (headersWithCustomFilters.length && headersWithCustomFilters.every(filterFn(item, search, _util_helpers__WEBPACK_IMPORTED_MODULE_15__["defaultFilter"]))) {
+	        return true;
+	      } // Otherwise, the `search` property is used to filter columns without a custom filter.
+
+
+	      return search && headersWithoutCustomFilters.some(filterFn(item, search, customFilter));
+	    });
+	  } else if (filterMode === 'intersection') {
+	    return items.filter(function (item) {
+	      // Headers with custom filters are evaluated whether or not a search term has been provided.
+	      // We need to match every filter to be included in the results.
+	      var matchesColumnFilters = headersWithCustomFilters.every(filterFn(item, search, _util_helpers__WEBPACK_IMPORTED_MODULE_15__["defaultFilter"])); // Headers without custom filters are only filtered by the `search` property if it is defined.
+	      // We only need a single column to match the search term to be included in the results.
+
+	      var matchesSearchTerm = !search || headersWithoutCustomFilters.some(filterFn(item, search, customFilter));
+	      return matchesColumnFilters && matchesSearchTerm;
+	    });
+	  } else {
+	    return items;
+	  }
 	}
 	/* @vue/component */
 
 
-	/* harmony default export */ __webpack_exports__["default"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_13__["default"])(_VDataIterator__WEBPACK_IMPORTED_MODULE_2__["VDataIterator"], _mixins_loadable__WEBPACK_IMPORTED_MODULE_11__["default"]).extend({
+	/* harmony default export */ __webpack_exports__["default"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_14__["default"])(_VDataIterator__WEBPACK_IMPORTED_MODULE_2__["VDataIterator"], _mixins_loadable__WEBPACK_IMPORTED_MODULE_11__["default"], _mixins_mouse__WEBPACK_IMPORTED_MODULE_12__["default"]).extend({
 	  name: 'v-data-table',
 	  // https://github.com/vuejs/vue/issues/6872
 	  directives: {
-	    ripple: _directives_ripple__WEBPACK_IMPORTED_MODULE_12__["default"]
+	    ripple: _directives_ripple__WEBPACK_IMPORTED_MODULE_13__["default"]
 	  },
 	  props: {
 	    headers: {
@@ -11062,9 +10948,19 @@
 	    },
 	    customFilter: {
 	      type: Function,
-	      default: _util_helpers__WEBPACK_IMPORTED_MODULE_14__["defaultFilter"]
+	      default: _util_helpers__WEBPACK_IMPORTED_MODULE_15__["defaultFilter"]
+	    },
+	    filterMode: {
+	      type: String,
+	      default: 'intersection'
 	    },
 	    itemClass: {
+	      type: [String, Function],
+	      default: function _default() {
+	        return '';
+	      }
+	    },
+	    itemStyle: {
 	      type: [String, Function],
 	      default: function _default() {
 	        return '';
@@ -11140,7 +11036,7 @@
 	      });
 	    },
 	    sanitizedHeaderProps: function sanitizedHeaderProps() {
-	      return Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["camelizeObjectKeys"])(this.headerProps);
+	      return Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["camelizeObjectKeys"])(this.headerProps);
 	    },
 	    computedItemsPerPage: function computedItemsPerPage() {
 	      var itemsPerPage = this.options && this.options.itemsPerPage ? this.options.itemsPerPage : this.itemsPerPage;
@@ -11178,7 +11074,7 @@
 	          original = _b[0],
 	          replacement = _b[1];
 
-	      if (_this.$attrs.hasOwnProperty(original)) Object(_util_console__WEBPACK_IMPORTED_MODULE_15__["breaking"])(original, replacement, _this);
+	      if (_this.$attrs.hasOwnProperty(original)) Object(_util_console__WEBPACK_IMPORTED_MODULE_16__["breaking"])(original, replacement, _this);
 	    });
 	  },
 	  mounted: function mounted() {
@@ -11203,20 +11099,38 @@
 	      });
 	    },
 	    customFilterWithColumns: function customFilterWithColumns(items, search) {
-	      return searchTableItems(items, search, this.headersWithCustomFilters, this.headersWithoutCustomFilters, this.customFilter);
+	      return searchTableItems(items, search, this.headersWithCustomFilters, this.headersWithoutCustomFilters, this.customFilter, this.filterMode);
 	    },
 	    customSortWithHeaders: function customSortWithHeaders(items, sortBy, sortDesc, locale) {
 	      return this.customSort(items, sortBy, sortDesc, locale, this.columnSorters);
 	    },
 	    createItemProps: function createItemProps(item, index) {
-	      var props = _VDataIterator__WEBPACK_IMPORTED_MODULE_2__["VDataIterator"].options.methods.createItemProps.call(this, item, index);
-	      return Object.assign(props, {
+	      var _this = this;
+
+	      var data = __assign(__assign({}, _VDataIterator__WEBPACK_IMPORTED_MODULE_2__["VDataIterator"].options.methods.createItemProps.call(this, item, index)), {
 	        headers: this.computedHeaders
+	      });
+
+	      return __assign(__assign({}, data), {
+	        attrs: {
+	          class: {
+	            'v-data-table__selected': data.isSelected
+	          }
+	        },
+	        on: __assign(__assign({}, this.getDefaultMouseEventHandlers(':row', function () {
+	          return data;
+	        }, true)), {
+	          // TODO: the first argument should be the event, and the second argument should be data,
+	          // but this is a breaking change so it's for v3
+	          click: function click(event) {
+	            return _this.$emit('click:row', item, data, event);
+	          }
+	        })
 	      });
 	    },
 	    genCaption: function genCaption(props) {
 	      if (this.caption) return [this.$createElement('caption', [this.caption])];
-	      return Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["getSlot"])(this, 'caption', props, true);
+	      return Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getSlot"])(this, 'caption', props, true);
 	    },
 	    genColgroup: function genColgroup(props) {
 	      var _this = this;
@@ -11259,12 +11173,12 @@
 	        }
 	      }; // TODO: rename to 'head'? (thead, tbody, tfoot)
 
-	      var children = [Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["getSlot"])(this, 'header', __assign(__assign({}, data), {
+	      var children = [Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getSlot"])(this, 'header', __assign(__assign({}, data), {
 	        isMobile: this.isMobile
 	      }))];
 
 	      if (!this.hideDefaultHeader) {
-	        var scopedSlots = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["getPrefixedScopedSlots"])('header.', this.$scopedSlots);
+	        var scopedSlots = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getPrefixedScopedSlots"])('header.', this.$scopedSlots);
 	        children.push(this.$createElement(_VDataTableHeader__WEBPACK_IMPORTED_MODULE_4__["default"], __assign(__assign({}, data), {
 	          scopedSlots: scopedSlots
 	        })));
@@ -11450,7 +11364,7 @@
 	        classes = {};
 	      }
 
-	      var scopedSlots = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["getPrefixedScopedSlots"])('item.', this.$scopedSlots);
+	      var scopedSlots = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getPrefixedScopedSlots"])('item.', this.$scopedSlots);
 	      var data = this.createItemProps(item, index);
 
 	      if (this.showSelect) {
@@ -11499,10 +11413,11 @@
 	      }
 
 	      return this.$createElement(this.isMobile ? _MobileRow__WEBPACK_IMPORTED_MODULE_10__["default"] : _Row__WEBPACK_IMPORTED_MODULE_6__["default"], {
-	        key: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["getObjectValueByPath"])(item, this.itemKey),
-	        class: Object(_util_mergeData__WEBPACK_IMPORTED_MODULE_16__["mergeClasses"])(__assign(__assign({}, classes), {
+	        key: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getObjectValueByPath"])(item, this.itemKey),
+	        class: Object(_util_mergeData__WEBPACK_IMPORTED_MODULE_17__["mergeClasses"])(__assign(__assign({}, classes), {
 	          'v-data-table__selected': data.isSelected
-	        }), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["getPropertyFromItem"])(item, this.itemClass)),
+	        }), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getPropertyFromItem"])(item, this.itemClass)),
+	        style: Object(_util_mergeData__WEBPACK_IMPORTED_MODULE_17__["mergeStyles"])({}, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getPropertyFromItem"])(item, this.itemStyle)),
 	        props: {
 	          headers: this.computedHeaders,
 	          hideDefaultHeader: this.hideDefaultHeader,
@@ -11511,19 +11426,7 @@
 	          rtl: this.$vuetify.rtl
 	        },
 	        scopedSlots: scopedSlots,
-	        on: {
-	          // TODO: for click, the first argument should be the event, and the second argument should be data,
-	          // but this is a breaking change so it's for v3
-	          click: function click() {
-	            return _this.$emit('click:row', item, data);
-	          },
-	          contextmenu: function contextmenu(event) {
-	            return _this.$emit('contextmenu:row', event, data);
-	          },
-	          dblclick: function dblclick(event) {
-	            return _this.$emit('dblclick:row', event, data);
-	          }
-	        }
+	        on: data.on
 	      });
 	    },
 	    genBody: function genBody(props) {
@@ -11540,7 +11443,7 @@
 	        return this.$scopedSlots.body(data);
 	      }
 
-	      return this.$createElement('tbody', [Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["getSlot"])(this, 'body.prepend', data, true), this.genItems(props.items, props), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["getSlot"])(this, 'body.append', data, true)]);
+	      return this.$createElement('tbody', [Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getSlot"])(this, 'body.prepend', data, true), this.genItems(props.items, props), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getSlot"])(this, 'body.append', data, true)]);
 	    },
 	    genFoot: function genFoot(props) {
 	      var _a, _b;
@@ -11562,11 +11465,11 @@
 	        widths: this.widths,
 	        headers: this.computedHeaders
 	      };
-	      var children = [Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["getSlot"])(this, 'footer', data, true)];
+	      var children = [Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getSlot"])(this, 'footer', data, true)];
 
 	      if (!this.hideDefaultFooter) {
 	        children.push(this.$createElement(_VDataIterator__WEBPACK_IMPORTED_MODULE_2__["VDataFooter"], __assign(__assign({}, data), {
-	          scopedSlots: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["getPrefixedScopedSlots"])('footer.', this.$scopedSlots)
+	          scopedSlots: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getPrefixedScopedSlots"])('footer.', this.$scopedSlots)
 	        })));
 	      }
 
@@ -11598,9 +11501,10 @@
 	      return this.$createElement(_VSimpleTable__WEBPACK_IMPORTED_MODULE_9__["default"], {
 	        props: simpleProps,
 	        class: {
-	          'v-data-table--mobile': this.isMobile
+	          'v-data-table--mobile': this.isMobile,
+	          'v-data-table--selectable': this.showSelect
 	        }
-	      }, [this.proxySlot('top', Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["getSlot"])(this, 'top', __assign(__assign({}, props), {
+	      }, [this.proxySlot('top', Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["getSlot"])(this, 'top', __assign(__assign({}, props), {
 	        isMobile: this.isMobile
 	      }), true)), this.genCaption(props), this.genColgroup(props), this.genHeaders(props), this.genBody(props), this.genFoot(props), this.proxySlot('bottom', this.genFooters(props))]);
 	    },
@@ -11622,7 +11526,7 @@
 	      on: {
 	        'update:options': function updateOptions(v, old) {
 	          _this.internalGroupBy = v.groupBy || [];
-	          !Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["deepEqual"])(v, old) && _this.$emit('update:options', v);
+	          !Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["deepEqual"])(v, old) && _this.$emit('update:options', v);
 	        },
 	        'update:page': function updatePage(v) {
 	          return _this.$emit('update:page', v);
@@ -11643,7 +11547,7 @@
 	          return _this.$emit('update:group-desc', v);
 	        },
 	        pagination: function pagination(v, old) {
-	          return !Object(_util_helpers__WEBPACK_IMPORTED_MODULE_14__["deepEqual"])(v, old) && _this.$emit('pagination', v);
+	          return !Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["deepEqual"])(v, old) && _this.$emit('pagination', v);
 	        },
 	        'current-items': function currentItems(v) {
 	          _this.internalCurrentItems = v;
@@ -15231,7 +15135,9 @@
 	        }]
 	      }), [h('div', {
 	        class: 'v-expansion-panel-content__wrap'
-	      }, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["getSlot"])(_this))])];
+	      }, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["getSlot"])(_this, 'default', {
+	        open: _this.isActive
+	      }))])];
 	    }));
 	  }
 	}));
@@ -15330,7 +15236,9 @@
 	      this.$emit('click', e);
 	    },
 	    genIcon: function genIcon() {
-	      var icon = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["getSlot"])(this, 'actions') || [this.$createElement(_VIcon__WEBPACK_IMPORTED_MODULE_1__["default"], this.expandIcon)];
+	      var icon = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["getSlot"])(this, 'actions', {
+	        open: this.isActive
+	      }) || [this.$createElement(_VIcon__WEBPACK_IMPORTED_MODULE_1__["default"], this.expandIcon)];
 	      return this.$createElement(_transitions__WEBPACK_IMPORTED_MODULE_0__["VFadeTransition"], [this.$createElement('div', {
 	        staticClass: 'v-expansion-panel-header__icon',
 	        class: {
@@ -17698,6 +17606,8 @@
 	    genIcon: function genIcon(type, cb, extraData) {
 	      var _this = this;
 
+	      var _a;
+
 	      if (extraData === void 0) {
 	        extraData = {};
 	      }
@@ -17705,9 +17615,17 @@
 	      var icon = this[type + "Icon"];
 	      var eventName = "click:" + Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["kebabCase"])(type);
 	      var hasListener = !!(this.listeners$[eventName] || cb);
+	      var localeKey = {
+	        prepend: 'prependAction',
+	        prependInner: 'prependAction',
+	        append: 'appendAction',
+	        appendOuter: 'appendAction',
+	        clear: 'clear'
+	      }[type];
+	      var label = hasListener && localeKey ? this.$vuetify.lang.t("$vuetify.input." + localeKey, (_a = this.label) !== null && _a !== void 0 ? _a : '') : undefined;
 	      var data = Object(_util_mergeData__WEBPACK_IMPORTED_MODULE_7__["default"])({
 	        attrs: {
-	          'aria-label': hasListener ? Object(_util_helpers__WEBPACK_IMPORTED_MODULE_6__["kebabCase"])(type).split('-')[0] + ' icon' : undefined,
+	          'aria-label': label,
 	          color: this.validationState,
 	          dark: this.dark,
 	          disabled: this.isDisabled,
@@ -17855,6 +17773,17 @@
 
 	/***/ }),
 
+	/***/ "./src/components/VItemGroup/VItem.sass":
+	/*!**********************************************!*\
+	  !*** ./src/components/VItemGroup/VItem.sass ***!
+	  \**********************************************/
+	/*! no static exports found */
+	/***/ (function(module, exports, __webpack_require__) {
+
+	// extracted by mini-css-extract-plugin
+
+	/***/ }),
+
 	/***/ "./src/components/VItemGroup/VItem.ts":
 	/*!********************************************!*\
 	  !*** ./src/components/VItemGroup/VItem.ts ***!
@@ -17863,12 +17792,31 @@
 	/***/ (function(module, __webpack_exports__, __webpack_require__) {
 	__webpack_require__.r(__webpack_exports__);
 	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseItem", function() { return BaseItem; });
-	/* harmony import */ var _mixins_groupable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/groupable */ "./src/mixins/groupable/index.ts");
-	/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/mixins */ "./src/util/mixins.ts");
-	/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/console */ "./src/util/console.ts");
-	/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "vue");
-	/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
-	// Mixins
+	/* harmony import */ __webpack_require__(/*! ./VItem.sass */ "./src/components/VItemGroup/VItem.sass");
+	/* harmony import */ var _mixins_groupable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/groupable */ "./src/mixins/groupable/index.ts");
+	/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/mixins */ "./src/util/mixins.ts");
+	/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/console */ "./src/util/console.ts");
+	/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "vue");
+	/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
+	var __assign = function () {
+	  __assign = Object.assign || function (t) {
+	    for (var s, i = 1, n = arguments.length; i < n; i++) {
+	      s = arguments[i];
+
+	      for (var p in s) {
+	        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+	      }
+	    }
+
+	    return t;
+	  };
+
+	  return __assign.apply(this, arguments);
+	}; // Styles
+
+
+	 // Mixins
+
 	 // Utilities
 
 
@@ -17877,12 +17825,13 @@
 
 	/* @vue/component */
 
-	var BaseItem = vue__WEBPACK_IMPORTED_MODULE_3___default.a.extend({
+	var BaseItem = vue__WEBPACK_IMPORTED_MODULE_4___default.a.extend({
 	  props: {
 	    activeClass: String,
 	    value: {
 	      required: false
-	    }
+	    },
+	    disabled: Boolean
 	  },
 	  data: function data() {
 	    return {
@@ -17898,7 +17847,7 @@
 	    var _a;
 
 	    if (!this.$scopedSlots.default) {
-	      Object(_util_console__WEBPACK_IMPORTED_MODULE_2__["consoleWarn"])('v-item is missing a default scopedSlot', this);
+	      Object(_util_console__WEBPACK_IMPORTED_MODULE_3__["consoleWarn"])('v-item is missing a default scopedSlot', this);
 	      return null;
 	    }
 
@@ -17917,17 +17866,24 @@
 	    }
 
 	    if (!element || Array.isArray(element) || !element.tag) {
-	      Object(_util_console__WEBPACK_IMPORTED_MODULE_2__["consoleWarn"])('v-item should only contain a single element', this);
+	      Object(_util_console__WEBPACK_IMPORTED_MODULE_3__["consoleWarn"])('v-item should only contain a single element', this);
 	      return element;
 	    }
 
 	    element.data = this._b(element.data || {}, element.tag, {
-	      class: (_a = {}, _a[this.activeClass] = this.isActive, _a)
+	      class: (_a = {}, _a[this.activeClass] = this.isActive, _a['v-item--disabled'] = this.disabled, _a)
 	    });
+
+	    if (this.disabled) {
+	      element.data.attrs = __assign(__assign({}, element.data.attrs), {
+	        tabindex: -1
+	      });
+	    }
+
 	    return element;
 	  }
 	});
-	/* harmony default export */ __webpack_exports__["default"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_1__["default"])(BaseItem, Object(_mixins_groupable__WEBPACK_IMPORTED_MODULE_0__["factory"])('itemGroup', 'v-item', 'v-item-group')).extend({
+	/* harmony default export */ __webpack_exports__["default"] = (Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__["default"])(BaseItem, Object(_mixins_groupable__WEBPACK_IMPORTED_MODULE_1__["factory"])('itemGroup', 'v-item', 'v-item-group')).extend({
 	  name: 'v-item'
 	}));
 
@@ -18246,6 +18202,7 @@
 	/* harmony import */ var _mixins_themeable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/themeable */ "./src/mixins/themeable/index.ts");
 	/* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/mixins */ "./src/util/mixins.ts");
 	/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/helpers */ "./src/util/helpers.ts");
+	/* harmony import */ var _util_mergeData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../util/mergeData */ "./src/util/mergeData.ts");
 	var __assign = function () {
 	  __assign = Object.assign || function (t) {
 	    for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -18268,6 +18225,7 @@
 
 
 	 // Helpers
+
 
 
 	/* @vue/component */
@@ -18297,8 +18255,9 @@
 	  render: function render(h, ctx) {
 	    var children = ctx.children,
 	        listeners = ctx.listeners,
-	        props = ctx.props;
-	    var data = {
+	        props = ctx.props,
+	        data = ctx.data;
+	    var newData = Object(_util_mergeData__WEBPACK_IMPORTED_MODULE_5__["default"])({
 	      staticClass: 'v-label',
 	      class: __assign({
 	        'v-label--active': props.value,
@@ -18315,8 +18274,8 @@
 	        position: props.absolute ? 'absolute' : 'relative'
 	      },
 	      ref: 'label'
-	    };
-	    return h('label', _mixins_colorable__WEBPACK_IMPORTED_MODULE_1__["default"].options.methods.setTextColor(props.focused && props.color, data), children);
+	    }, data);
+	    return h('label', _mixins_colorable__WEBPACK_IMPORTED_MODULE_1__["default"].options.methods.setTextColor(props.focused && props.color, newData), children);
 	  }
 	}));
 
@@ -19510,6 +19469,12 @@
 	    transition: {
 	      type: [Boolean, String],
 	      default: 'v-menu-transition'
+	    },
+	    contentProps: {
+	      type: Object,
+	      default: function _default() {
+	        return {};
+	      }
 	    }
 	  },
 	  data: function data() {
@@ -19744,7 +19709,7 @@
 	      var _this = this;
 
 	      var options = {
-	        attrs: __assign(__assign({}, this.getScopeIdAttrs()), {
+	        attrs: __assign(__assign(__assign({}, this.getScopeIdAttrs()), this.contentProps), {
 	          role: 'role' in this.$attrs ? this.$attrs.role : 'menu'
 	        }),
 	        staticClass: 'v-menu__content',
@@ -19850,6 +19815,8 @@
 	    },
 	    onKeyDown: function onKeyDown(e) {
 	      var _this = this;
+
+	      if (this.disableKeys) return;
 
 	      if (e.keyCode === _util_helpers__WEBPACK_IMPORTED_MODULE_13__["keyCodes"].esc) {
 	        // Wait for dependent elements to close first
@@ -21249,6 +21216,8 @@
 	  props: {
 	    circle: Boolean,
 	    disabled: Boolean,
+	    navigationColor: String,
+	    navigationTextColor: String,
 	    length: {
 	      type: Number,
 	      default: 0,
@@ -21385,7 +21354,7 @@
 	      return range;
 	    },
 	    genIcon: function genIcon(h, icon, disabled, fn, label) {
-	      return h('li', [h('button', {
+	      return h('li', [h('button', this.setBackgroundColor(this.navigationColor, {
 	        staticClass: 'v-pagination__navigation',
 	        class: {
 	          'v-pagination__navigation--disabled': disabled
@@ -21398,7 +21367,11 @@
 	        on: disabled ? {} : {
 	          click: fn
 	        }
-	      }, [h(_VIcon__WEBPACK_IMPORTED_MODULE_1__["default"], [icon])])]);
+	      }), [h(_VIcon__WEBPACK_IMPORTED_MODULE_1__["default"], {
+	        props: {
+	          color: this.navigationTextColor
+	        }
+	      }, [icon])])]);
 	    },
 	    genItem: function genItem(h, i) {
 	      var _this = this;
@@ -22295,7 +22268,10 @@
 	  name: 'v-radio',
 	  inheritAttrs: false,
 	  props: {
-	    disabled: Boolean,
+	    disabled: {
+	      type: Boolean,
+	      default: null
+	    },
 	    id: String,
 	    label: String,
 	    name: String,
@@ -22307,7 +22283,10 @@
 	      type: String,
 	      default: '$radioOn'
 	    },
-	    readonly: Boolean,
+	    readonly: {
+	      type: Boolean,
+	      default: null
+	    },
 	    value: {
 	      default: null
 	    }
@@ -22339,10 +22318,14 @@
 	      return (this.radioGroup || {}).hasState;
 	    },
 	    isDisabled: function isDisabled() {
-	      return this.disabled || !!this.radioGroup && this.radioGroup.isDisabled;
+	      var _a;
+
+	      return (_a = this.disabled) !== null && _a !== void 0 ? _a : !!this.radioGroup && this.radioGroup.isDisabled;
 	    },
 	    isReadonly: function isReadonly() {
-	      return this.readonly || !!this.radioGroup && this.radioGroup.isReadonly;
+	      var _a;
+
+	      return (_a = this.readonly) !== null && _a !== void 0 ? _a : !!this.radioGroup && this.radioGroup.isReadonly;
 	    },
 	    computedName: function computedName() {
 	      if (this.name || !this.radioGroup) {
@@ -23580,6 +23563,12 @@
 	          (_a = _this.$refs.menu) === null || _a === void 0 ? void 0 : _a.updateDimensions();
 	        });
 	      }
+
+	      if (this.hideSelected) {
+	        this.$nextTick(function () {
+	          _this.onScroll();
+	        });
+	      }
 	    },
 	    isMenuActive: function isMenuActive(val) {
 	      var _this = this;
@@ -23814,19 +23803,18 @@
 	      var _this = this;
 
 	      var props = this.$_menuProps;
-	      props.activator = this.$refs['input-slot']; // Attach to root el so that
-	      // menu covers prepend/append icons
-
-	      if ( // TODO: make this a computed property or helper or something
+	      props.activator = this.$refs['input-slot'];
+	      if ('attach' in props) ;else if ( // TODO: make this a computed property or helper or something
 	      this.attach === '' || // If used as a boolean prop (<v-menu attach>)
 	      this.attach === true || // If bound to a boolean (<v-menu :attach="true">)
 	      this.attach === 'attach' // If bound as boolean prop in pug (v-menu(attach))
 	      ) {
+	        // Attach to root el so that
+	        // menu covers prepend/append icons
 	        props.attach = this.$el;
 	      } else {
 	        props.attach = this.attach;
 	      }
-
 	      return this.$createElement(_VMenu__WEBPACK_IMPORTED_MODULE_3__["default"], {
 	        attrs: {
 	          role: undefined
@@ -23933,7 +23921,7 @@
 	    onKeyPress: function onKeyPress(e) {
 	      var _this = this;
 
-	      if (this.multiple || !this.isInteractive || this.disableLookup) return;
+	      if (this.multiple || !this.isInteractive || this.disableLookup || e.key.length > 1 || e.ctrlKey || e.metaKey || e.altKey) return;
 	      var KEYBOARD_LOOKUP_THRESHOLD = 1000; // milliseconds
 
 	      var now = performance.now();
@@ -24034,7 +24022,9 @@
 
 	      if (!this.isMenuActive) {
 	        requestAnimationFrame(function () {
-	          return _this.getContent().scrollTop = 0;
+	          var content = _this.getContent();
+
+	          if (content) content.scrollTop = 0;
 	        });
 	      } else {
 	        if (this.lastItem > this.computedItems.length) return;
@@ -24679,6 +24669,10 @@
 	  props: {
 	    boilerplate: Boolean,
 	    loading: Boolean,
+	    loadingText: {
+	      type: String,
+	      default: '$vuetify.loading'
+	    },
 	    tile: Boolean,
 	    transition: String,
 	    type: String,
@@ -24692,11 +24686,12 @@
 	  computed: {
 	    attrs: function attrs() {
 	      if (!this.isLoading) return this.$attrs;
-	      return !this.boilerplate ? __assign({
-	        'aria-busy': true,
-	        'aria-live': 'polite',
-	        role: 'alert'
-	      }, this.$attrs) : {};
+	      return __assign({
+	        'aria-busy': !this.boilerplate ? true : undefined,
+	        'aria-live': !this.boilerplate ? 'polite' : undefined,
+	        'aria-label': !this.boilerplate ? this.$vuetify.lang.t(this.loadingText) : undefined,
+	        role: !this.boilerplate ? 'alert' : undefined
+	      }, this.$attrs);
 	    },
 	    classes: function classes() {
 	      return __assign(__assign({
@@ -24999,7 +24994,7 @@
 	    showArrows: {
 	      type: [Boolean, String],
 	      validator: function validator(v) {
-	        return typeof v === 'boolean' || ['always', 'desktop', 'mobile'].includes(v);
+	        return typeof v === 'boolean' || ['always', 'never', 'desktop', 'mobile'].includes(v);
 	      }
 	    }
 	  },
@@ -25052,6 +25047,10 @@
 
 	        case 'mobile':
 	          return this.isMobile || this.isOverflowing || Math.abs(this.scrollOffset) > 0;
+	        // Always hide arrows
+
+	        case 'never':
+	          return false;
 	        // https://material.io/components/tabs#scrollable-tabs
 	        // Always show arrows when
 	        // overflowed on desktop
@@ -27891,6 +27890,9 @@
 	    ripple: {
 	      type: [Boolean, Object],
 	      default: true
+	    },
+	    tabValue: {
+	      required: false
 	    }
 	  },
 	  data: function data() {
@@ -27907,6 +27909,7 @@
 	      }), this.groupClasses);
 	    },
 	    value: function value() {
+	      if (this.tabValue != null) return this.tabValue;
 	      var to = this.to || this.href;
 	      if (to == null) return to;
 
@@ -29506,6 +29509,7 @@
 	).extend({
 	  name: 'v-time-picker',
 	  props: {
+	    activePicker: String,
 	    allowedHours: [Function, Array],
 	    allowedMinutes: [Function, Array],
 	    allowedSeconds: [Function, Array],
@@ -29660,6 +29664,8 @@
 	    }
 	  },
 	  watch: {
+	    activePicker: 'setPicker',
+	    selecting: 'emitPicker',
 	    value: 'setInputData'
 	  },
 	  mounted: function mounted() {
@@ -29677,6 +29683,20 @@
 	    emitValue: function emitValue() {
 	      var value = this.genValue();
 	      if (value !== null) this.$emit('input', value);
+	    },
+	    emitPicker: function emitPicker(value) {
+	      var activePicker = 'HOUR';
+
+	      if (value === _SelectingTimes__WEBPACK_IMPORTED_MODULE_7__["SelectingTimes"].Minute) {
+	        activePicker = 'MINUTE';
+	      } else if (value === _SelectingTimes__WEBPACK_IMPORTED_MODULE_7__["SelectingTimes"].Second) {
+	        activePicker = 'SECOND';
+	      }
+
+	      this.$emit('update:active-picker', activePicker);
+	    },
+	    setPicker: function setPicker(picker) {
+	      if (picker === 'HOUR') this.selecting = _SelectingTimes__WEBPACK_IMPORTED_MODULE_7__["SelectingTimes"].Hour;else if (picker === 'MINUTE') this.selecting = _SelectingTimes__WEBPACK_IMPORTED_MODULE_7__["SelectingTimes"].Minute;else if (picker === 'SECOND' && this.useSeconds) this.selecting = _SelectingTimes__WEBPACK_IMPORTED_MODULE_7__["SelectingTimes"].Second;
 	    },
 	    setPeriod: function setPeriod(period) {
 	      this.period = period;
@@ -34076,6 +34096,8 @@
 	      animation.classList.remove('v-ripple__animation--in');
 	      animation.classList.add('v-ripple__animation--out');
 	      setTimeout(function () {
+	        var _a;
+
 	        var ripples = el.getElementsByClassName('v-ripple__animation');
 
 	        if (ripples.length === 1 && el.dataset.previousPosition) {
@@ -34083,7 +34105,7 @@
 	          delete el.dataset.previousPosition;
 	        }
 
-	        animation.parentNode && el.removeChild(animation.parentNode);
+	        if (((_a = animation.parentNode) === null || _a === void 0 ? void 0 : _a.parentNode) === el) el.removeChild(animation.parentNode);
 	      }, 300);
 	    }, delay);
 	  }
@@ -34531,7 +34553,7 @@
 
 	  Vuetify.install = _install__WEBPACK_IMPORTED_MODULE_0__["install"];
 	  Vuetify.installed = false;
-	  Vuetify.version = "2.6.12";
+	  Vuetify.version = "2.7.1";
 	  Vuetify.config = {
 	    silent: false
 	  };
@@ -34728,6 +34750,11 @@
 	  calendar: {
 	    moreEvents: '{0} meer'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} files',
 	    counterSize: '{0} files ({1} in total)'
@@ -34749,7 +34776,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -34765,23 +34793,23 @@
 	  badge: 'شارة',
 	  close: 'إغلاق',
 	  dataIterator: {
-	    noResultsText: 'لا توجد سجلات مطابقة',
-	    loadingText: 'تحميل العنصر...'
+	    noResultsText: 'لم يتم إيجاد نتائج',
+	    loadingText: 'يتم جلب العناصر...'
 	  },
 	  dataTable: {
-	    itemsPerPageText: 'الصفوف لكل صفحة:',
+	    itemsPerPageText: 'عدد الصفوف لكل صفحة:',
 	    ariaLabel: {
-	      sortDescending: 'مفروز تنازلي. تنشيط لإزالة الفرز.',
-	      sortAscending: 'مفروز تصاعدي. تنشيط للفرز التنازلي.',
-	      sortNone: 'غير مفروزة. تفعيل لفرز تصاعدي.',
-	      activateNone: 'Activate to remove sorting.',
-	      activateDescending: 'Activate to sort descending.',
-	      activateAscending: 'Activate to sort ascending.'
+	      sortDescending: 'مرتب تنازلياً.',
+	      sortAscending: 'مرتب تصاعدياً.',
+	      sortNone: 'غير مرتب.',
+	      activateNone: 'نشط لإزالة الترتيب.',
+	      activateDescending: 'نشط للترتيب تنازلياً.',
+	      activateAscending: 'نشط للترتيب تصاعدياً.'
 	    },
-	    sortBy: 'مفروزة حسب'
+	    sortBy: 'رتب حسب'
 	  },
 	  dataFooter: {
-	    itemsPerPageText: 'العناصر لكل صفحة:',
+	    itemsPerPageText: 'عدد العناصر لكل صفحة:',
 	    itemsPerPageAll: 'الكل',
 	    nextPage: 'الصفحة التالية',
 	    prevPage: 'الصفحة السابقة',
@@ -34790,22 +34818,27 @@
 	    pageText: '{0}-{1} من {2}'
 	  },
 	  datePicker: {
-	    itemsSelected: '{0} مختارة',
+	    itemsSelected: 'تم تحديد {0}',
 	    nextMonthAriaLabel: 'الشهر القادم',
 	    nextYearAriaLabel: 'العام القادم',
 	    prevMonthAriaLabel: 'الشهر الماضى',
 	    prevYearAriaLabel: 'السنة الماضية'
 	  },
-	  noDataText: 'لا توجد بيانات متاحة',
+	  noDataText: 'لا توجد بيانات',
 	  carousel: {
-	    prev: 'البصري السابق',
-	    next: 'البصري التالي',
+	    prev: 'المعروض السابق',
+	    next: 'المعروض التالي',
 	    ariaLabel: {
-	      delimiter: 'Carousel slide {0} of {1}'
+	      delimiter: 'المعروض رقم {0} من {1}'
 	    }
 	  },
 	  calendar: {
 	    moreEvents: '{0} أكثر'
+	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
 	  },
 	  fileInput: {
 	    counter: '{0} ملفات',
@@ -34817,18 +34850,19 @@
 	  },
 	  pagination: {
 	    ariaLabel: {
-	      wrapper: 'ترقيم الصفحات الملاحة',
+	      wrapper: 'الإنتقال بين الصفحات',
 	      next: 'الصفحة التالية',
 	      previous: 'الصفحة السابقة',
-	      page: '{0} انتقل إلى صفحة',
-	      currentPage: '{0} الصفحة الحالية ، الصفحة'
+	      page: '{0} انتقل إلى الصفحة',
+	      currentPage: '{0} الصفحة الحالية رقمها'
 	    }
 	  },
 	  rating: {
 	    ariaLabel: {
-	      icon: 'Rating {0} of {1}'
+	      icon: 'القييم {0} من {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -34886,6 +34920,11 @@
 	  calendar: {
 	    moreEvents: '{0} ədad daha'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} fayl',
 	    counterSize: '{0} fayl (cəmi {1})'
@@ -34907,7 +34946,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -34965,6 +35005,11 @@
 	  calendar: {
 	    moreEvents: 'Още {0}'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} файла',
 	    counterSize: '{0} файла ({1} общо)'
@@ -34986,7 +35031,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35044,6 +35090,11 @@
 	  calendar: {
 	    moreEvents: '{0} més'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} fitxers',
 	    counterSize: '{0} fitxers ({1} en total)'
@@ -35065,7 +35116,8 @@
 	    ariaLabel: {
 	      icon: 'Puntuació {0} de {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35123,6 +35175,11 @@
 	  calendar: {
 	    moreEvents: '{0} زیاتر'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} فایل',
 	    counterSize: '{0} فایل ({1} لە کۆی گشتی)'
@@ -35144,7 +35201,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35202,6 +35260,11 @@
 	  calendar: {
 	    moreEvents: '{0} dalších'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} souborů',
 	    counterSize: '{0} souborů ({1} celkem)'
@@ -35223,7 +35286,8 @@
 	    ariaLabel: {
 	      icon: 'Hodnocení {0} z {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35281,6 +35345,11 @@
 	  calendar: {
 	    moreEvents: '{0} mere'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} filer',
 	    counterSize: '{0} filer ({1} total)'
@@ -35302,7 +35371,8 @@
 	    ariaLabel: {
 	      icon: 'Bedømmelse {0} af {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35360,6 +35430,11 @@
 	  calendar: {
 	    moreEvents: '{0} mehr'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} Dateien',
 	    counterSize: '{0} Dateien ({1} gesamt)'
@@ -35381,7 +35456,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35439,6 +35515,11 @@
 	  calendar: {
 	    moreEvents: '{0} ακόμη'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} files',
 	    counterSize: '{0} files ({1} in total)'
@@ -35460,7 +35541,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35518,6 +35600,11 @@
 	  calendar: {
 	    moreEvents: '{0} more'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} files',
 	    counterSize: '{0} files ({1} in total)'
@@ -35539,7 +35626,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35597,6 +35685,11 @@
 	  calendar: {
 	    moreEvents: '{0} más'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} archivos',
 	    counterSize: '{0} archivos ({1} en total)'
@@ -35618,7 +35711,8 @@
 	    ariaLabel: {
 	      icon: 'Puntuación {0} de {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35676,6 +35770,11 @@
 	  calendar: {
 	    moreEvents: '{0} veel'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} faili',
 	    counterSize: '{0} faili (kokku {1})'
@@ -35697,7 +35796,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35755,6 +35855,11 @@
 	  calendar: {
 	    moreEvents: '{بیشتر {0'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} پرونده',
 	    counterSize: '{0} پرونده ({1} در کل)'
@@ -35776,7 +35881,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35834,6 +35940,11 @@
 	  calendar: {
 	    moreEvents: '{0} lisää'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} tiedostoa',
 	    counterSize: '{0} tiedostoa ({1} yhteensä)'
@@ -35855,7 +35966,8 @@
 	    ariaLabel: {
 	      icon: 'Luokitus {0}/{1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35913,6 +36025,11 @@
 	  calendar: {
 	    moreEvents: '{0} de plus'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} fichier(s)',
 	    counterSize: '{0} fichier(s) ({1} au total)'
@@ -35934,7 +36051,8 @@
 	    ariaLabel: {
 	      icon: 'Note de {0} sur {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -35992,6 +36110,11 @@
 	  calendar: {
 	    moreEvents: '{0} נוספים'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} קבצים',
 	    counterSize: '{0} קבצים ({1} בסך הכל)'
@@ -36013,7 +36136,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -36071,6 +36195,11 @@
 	  calendar: {
 	    moreEvents: 'Još {0}'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: 'Odabranih datoteka: {0}',
 	    counterSize: 'Odabranih datoteka: {0} ({1} ukupno)'
@@ -36092,7 +36221,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -36150,6 +36280,11 @@
 	  calendar: {
 	    moreEvents: '{0} további'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} fájl',
 	    counterSize: '{0} fájl ({1} összesen)'
@@ -36171,7 +36306,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -36229,6 +36365,11 @@
 	  calendar: {
 	    moreEvents: '{0} lagi'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} berkas',
 	    counterSize: '{0} berkas (dari total {1})'
@@ -36250,7 +36391,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -36486,6 +36628,11 @@
 	  calendar: {
 	    moreEvents: '{0} di più'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} file',
 	    counterSize: '{0} file ({1} in totale)'
@@ -36507,7 +36654,8 @@
 	    ariaLabel: {
 	      icon: 'Valutazione {0} di {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -36565,6 +36713,11 @@
 	  calendar: {
 	    moreEvents: 'さらに{0}'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} ファイル',
 	    counterSize: '{0} ファイル (合計 {1})'
@@ -36586,7 +36739,8 @@
 	    ariaLabel: {
 	      icon: '評価 {1} のうち {0}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -36644,6 +36798,11 @@
 	  calendar: {
 	    moreEvents: '{0} 더보기'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} files',
 	    counterSize: '{0} files ({1} in total)'
@@ -36665,7 +36824,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -36723,6 +36883,11 @@
 	  calendar: {
 	    moreEvents: 'Daugiau {0}'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} failų',
 	    counterSize: '{0} failų ({1} iš viso)'
@@ -36744,7 +36909,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -36802,6 +36968,11 @@
 	  calendar: {
 	    moreEvents: 'Vēl {0}'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} files',
 	    counterSize: '{0} files ({1} in total)'
@@ -36823,7 +36994,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -36881,6 +37053,11 @@
 	  calendar: {
 	    moreEvents: '{0} meer'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} bestanden',
 	    counterSize: '{0} bestanden ({1} in totaal)'
@@ -36902,7 +37079,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -36960,6 +37138,11 @@
 	  calendar: {
 	    moreEvents: '{0} flere'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} filer',
 	    counterSize: '{0} filer ({1} totalt)'
@@ -36981,7 +37164,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37039,6 +37223,11 @@
 	  calendar: {
 	    moreEvents: '{0} więcej'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: 'Liczba plików: {0}',
 	    counterSize: 'Liczba plików: {0} (łącznie {1})'
@@ -37060,7 +37249,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37118,6 +37308,11 @@
 	  calendar: {
 	    moreEvents: 'Mais {0}'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} arquivo(s)',
 	    counterSize: '{0} arquivo(s) ({1} no total)'
@@ -37139,7 +37334,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37197,6 +37393,11 @@
 	  calendar: {
 	    moreEvents: 'încă {0}'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} fișiere',
 	    counterSize: '{0} fișiere ({1} în total)'
@@ -37218,7 +37419,8 @@
 	    ariaLabel: {
 	      icon: 'Rating de {0} din {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37276,6 +37478,11 @@
 	  calendar: {
 	    moreEvents: 'Еще {0}'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: 'Файлов: {0}',
 	    counterSize: 'Файлов: {0} (всего {1})'
@@ -37297,7 +37504,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37355,6 +37563,11 @@
 	  calendar: {
 	    moreEvents: '{0} ďalších'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} súborov',
 	    counterSize: '{0} súborov ({1} celkom)'
@@ -37376,7 +37589,8 @@
 	    ariaLabel: {
 	      icon: 'Hodnotenie {0} z {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37434,6 +37648,11 @@
 	  calendar: {
 	    moreEvents: 'Še {0}'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} datotek',
 	    counterSize: '{0} datotek ({1} skupno)'
@@ -37455,7 +37674,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37513,6 +37733,11 @@
 	  calendar: {
 	    moreEvents: '{0} више'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} фајлова',
 	    counterSize: '{0} фајлова ({1} укупно)'
@@ -37534,7 +37759,8 @@
 	    ariaLabel: {
 	      icon: 'Оцена {0} од {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37592,6 +37818,11 @@
 	  calendar: {
 	    moreEvents: '{0} više'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} fajlova',
 	    counterSize: '{0} fajlova ({1} ukupno)'
@@ -37613,7 +37844,8 @@
 	    ariaLabel: {
 	      icon: 'Ocena {0} od {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37671,6 +37903,11 @@
 	  calendar: {
 	    moreEvents: '{0} fler'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} filer',
 	    counterSize: '{0} filer (av {1} totalt)'
@@ -37692,7 +37929,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37750,6 +37988,11 @@
 	  calendar: {
 	    moreEvents: 'มีอีก {0}'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} ไฟล์',
 	    counterSize: '{0} ไฟล์ (รวม {1})'
@@ -37771,7 +38014,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37829,6 +38073,11 @@
 	  calendar: {
 	    moreEvents: '{0} tane daha'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} dosya',
 	    counterSize: '{0} dosya (toplamda {1})'
@@ -37850,7 +38099,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37908,6 +38158,11 @@
 	  calendar: {
 	    moreEvents: 'Ще {0}'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} файлів',
 	    counterSize: '{0} файлів ({1} загалом)'
@@ -37929,7 +38184,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -37987,6 +38243,11 @@
 	  calendar: {
 	    moreEvents: '{0} nữa'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} tệp',
 	    counterSize: '{0} tệp (tổng cộng {1})'
@@ -38008,7 +38269,8 @@
 	    ariaLabel: {
 	      icon: 'Đánh giá {0} trên {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -38066,6 +38328,11 @@
 	  calendar: {
 	    moreEvents: '还有 {0} 项'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} 个文件',
 	    counterSize: '{0} 个文件（共 {1}）'
@@ -38087,7 +38354,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -38145,6 +38413,11 @@
 	  calendar: {
 	    moreEvents: '還有其他 {0} 項'
 	  },
+	  input: {
+	    clear: 'Clear {0}',
+	    prependAction: '{0} prepended action',
+	    appendAction: '{0} appended action'
+	  },
 	  fileInput: {
 	    counter: '{0} 個檔案',
 	    counterSize: '{0} 個檔案（共 {1}）'
@@ -38166,7 +38439,8 @@
 	    ariaLabel: {
 	      icon: 'Rating {0} of {1}'
 	    }
-	  }
+	  },
+	  loading: 'Loading...'
 	});
 
 	/***/ }),
@@ -39247,7 +39521,15 @@
 	      this[namespace] && this[namespace].unregister(this);
 	    },
 	    methods: {
-	      toggle: function toggle() {
+	      toggle: function toggle(e) {
+	        if (this.disabled && e) {
+	          // Prevent keyboard actions
+	          // from children elements
+	          // within disabled tabs
+	          e.preventDefault();
+	          return;
+	        }
+
 	        this.$emit('change');
 	      }
 	    }
@@ -39900,6 +40182,149 @@
 
 	/***/ }),
 
+	/***/ "./src/mixins/mouse/index.ts":
+	/*!***********************************!*\
+	  !*** ./src/mixins/mouse/index.ts ***!
+	  \***********************************/
+	/*! exports provided: default */
+	/***/ (function(module, __webpack_exports__, __webpack_require__) {
+	__webpack_require__.r(__webpack_exports__);
+	/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "vue");
+	/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+	var __assign = function () {
+	  __assign = Object.assign || function (t) {
+	    for (var s, i = 1, n = arguments.length; i < n; i++) {
+	      s = arguments[i];
+
+	      for (var p in s) {
+	        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+	      }
+	    }
+
+	    return t;
+	  };
+
+	  return __assign.apply(this, arguments);
+	};
+
+
+	/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend({
+	  name: 'mouse',
+	  methods: {
+	    getDefaultMouseEventHandlers: function getDefaultMouseEventHandlers(suffix, getData, eventFirst) {
+	      var _a;
+
+	      if (eventFirst === void 0) {
+	        eventFirst = false;
+	      }
+
+	      var listeners = Object.keys(this.$listeners).filter(function (key) {
+	        return key.endsWith(suffix);
+	      }).reduce(function (acc, key) {
+	        acc[key] = {
+	          event: key.slice(0, -suffix.length)
+	        };
+	        return acc;
+	      }, {});
+	      return this.getMouseEventHandlers(__assign(__assign({}, listeners), (_a = {}, _a['contextmenu' + suffix] = {
+	        event: 'contextmenu',
+	        prevent: true,
+	        result: false
+	      }, _a)), getData, eventFirst);
+	    },
+	    getMouseEventHandlers: function getMouseEventHandlers(events, getData, eventFirst) {
+	      var _this = this;
+
+	      if (eventFirst === void 0) {
+	        eventFirst = false;
+	      }
+
+	      var on = {};
+
+	      var _loop_1 = function _loop_1(event) {
+	        var eventOptions = events[event];
+	        if (!this_1.$listeners[event]) return "continue"; // TODO somehow pull in modifiers
+
+	        var prefix = eventOptions.passive ? '&' : (eventOptions.once ? '~' : '') + (eventOptions.capture ? '!' : '');
+	        var key = prefix + eventOptions.event;
+
+	        var handler = function handler(e) {
+	          var _a, _b;
+
+	          var mouseEvent = e;
+
+	          if (eventOptions.button === undefined || mouseEvent.buttons > 0 && mouseEvent.button === eventOptions.button) {
+	            if (eventOptions.prevent) {
+	              e.preventDefault();
+	            }
+
+	            if (eventOptions.stop) {
+	              e.stopPropagation();
+	            } // Due to TouchEvent target always returns the element that is first placed
+	            // Even if touch point has since moved outside the interactive area of that element
+	            // Ref: https://developer.mozilla.org/en-US/docs/Web/API/Touch/target
+	            // This block of code aims to make sure touchEvent is always dispatched from the element that is being pointed at
+
+
+	            if (e && 'touches' in e) {
+	              var classSeparator_1 = ' ';
+	              var eventTargetClasses_1 = (_a = e.currentTarget) === null || _a === void 0 ? void 0 : _a.className.split(classSeparator_1);
+	              var currentTargets = document.elementsFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY); // Get "the same kind" current hovering target by checking
+	              // If element has the same class of initial touch start element (which has touch event listener registered)
+
+	              var currentTarget = currentTargets.find(function (t) {
+	                return t.className.split(classSeparator_1).some(function (c) {
+	                  return eventTargetClasses_1.includes(c);
+	                });
+	              });
+
+	              if (currentTarget && !((_b = e.target) === null || _b === void 0 ? void 0 : _b.isSameNode(currentTarget))) {
+	                currentTarget.dispatchEvent(new TouchEvent(e.type, {
+	                  changedTouches: e.changedTouches,
+	                  targetTouches: e.targetTouches,
+	                  touches: e.touches
+	                }));
+	                return;
+	              }
+	            } // TODO: VCalendar emits the calendar event as the first argument,
+	            // but it really should be the native event instead so modifiers can be used
+
+
+	            if (eventFirst) {
+	              _this.$emit(event, e, getData(e));
+	            } else {
+	              _this.$emit(event, getData(e), e);
+	            }
+	          }
+
+	          return eventOptions.result;
+	        };
+
+	        if (key in on) {
+	          /* istanbul ignore next */
+	          if (Array.isArray(on[key])) {
+	            on[key].push(handler);
+	          } else {
+	            on[key] = [on[key], handler];
+	          }
+	        } else {
+	          on[key] = handler;
+	        }
+	      };
+
+	      var this_1 = this;
+
+	      for (var event in events) {
+	        _loop_1(event);
+	      }
+
+	      return on;
+	    }
+	  }
+	}));
+
+	/***/ }),
+
 	/***/ "./src/mixins/overlayable/index.ts":
 	/*!*****************************************!*\
 	  !*** ./src/mixins/overlayable/index.ts ***!
@@ -40046,7 +40471,7 @@
 	      if (!alreadyAtStart && scrollingUp) return true;
 	      if (!alreadyAtEnd && scrollingDown) return true;
 
-	      if (alreadyAtStart || alreadyAtEnd) {
+	      if ((alreadyAtStart || alreadyAtEnd) && el.parentNode) {
 	        return this.shouldScroll(el.parentNode, e);
 	      }
 
@@ -41510,7 +41935,10 @@
 	/* harmony default export */ __webpack_exports__["default"] = (baseMixins.extend({
 	  name: 'validatable',
 	  props: {
-	    disabled: Boolean,
+	    disabled: {
+	      type: Boolean,
+	      default: null
+	    },
 	    error: Boolean,
 	    errorCount: {
 	      type: [Number, String],
@@ -41528,7 +41956,10 @@
 	        return [];
 	      }
 	    },
-	    readonly: Boolean,
+	    readonly: {
+	      type: Boolean,
+	      default: null
+	    },
 	    rules: {
 	      type: Array,
 	      default: function _default() {
@@ -41607,13 +42038,17 @@
 	      }
 	    },
 	    isDisabled: function isDisabled() {
-	      return this.disabled || !!this.form && this.form.disabled;
+	      var _a;
+
+	      return (_a = this.disabled) !== null && _a !== void 0 ? _a : !!this.form && this.form.disabled;
 	    },
 	    isInteractive: function isInteractive() {
 	      return !this.isDisabled && !this.isReadonly;
 	    },
 	    isReadonly: function isReadonly() {
-	      return this.readonly || !!this.form && this.form.readonly;
+	      var _a;
+
+	      return (_a = this.readonly) !== null && _a !== void 0 ? _a : !!this.form && this.form.readonly;
 	    },
 	    shouldValidate: function shouldValidate() {
 	      if (this.externalError) return true;
@@ -42496,7 +42931,7 @@
 	  clear: 'fas fa-times-circle',
 	  success: 'fas fa-check-circle',
 	  info: 'fas fa-info-circle',
-	  warning: 'fas fa-exclamation',
+	  warning: 'fas fa-exclamation-circle',
 	  error: 'fas fa-exclamation-triangle',
 	  prev: 'fas fa-chevron-left',
 	  next: 'fas fa-chevron-right',

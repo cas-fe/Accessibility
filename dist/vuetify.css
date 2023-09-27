@@ -72,7 +72,7 @@
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 .v-sheet.v-app-bar.v-toolbar.v-sheet--shaped {
-  border-radius: 24px 0;
+  border-radius: 16px 0;
 }
 
 .v-app-bar:not([data-booted=true]) {
@@ -133,7 +133,7 @@
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 .v-sheet.v-toolbar.v-sheet--shaped {
-  border-radius: 24px 0;
+  border-radius: 16px 0;
 }
 
 .v-toolbar {
@@ -323,9 +323,8 @@
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
 }
 .v-sheet.v-sheet--shaped {
-  border-radius: 24px 0;
+  border-radius: 16px 0;
 }
-@charset "UTF-8";
 @-webkit-keyframes v-shake {
   59% {
     margin-left: 0;
@@ -6305,6 +6304,10 @@ html.overflow-y-hidden {
 }
 
 .v-application .rounded-xl {
+  border-radius: 16px !important;
+}
+
+.v-application .rounded-xxl {
   border-radius: 24px !important;
 }
 
@@ -6337,6 +6340,11 @@ html.overflow-y-hidden {
 }
 
 .v-application .rounded-t-xl {
+  border-top-left-radius: 16px !important;
+  border-top-right-radius: 16px !important;
+}
+
+.v-application .rounded-t-xxl {
   border-top-left-radius: 24px !important;
   border-top-right-radius: 24px !important;
 }
@@ -6372,6 +6380,11 @@ html.overflow-y-hidden {
 }
 
 .v-application .rounded-r-xl {
+  border-top-right-radius: 16px !important;
+  border-bottom-right-radius: 16px !important;
+}
+
+.v-application .rounded-r-xxl {
   border-top-right-radius: 24px !important;
   border-bottom-right-radius: 24px !important;
 }
@@ -6407,6 +6420,11 @@ html.overflow-y-hidden {
 }
 
 .v-application .rounded-b-xl {
+  border-bottom-left-radius: 16px !important;
+  border-bottom-right-radius: 16px !important;
+}
+
+.v-application .rounded-b-xxl {
   border-bottom-left-radius: 24px !important;
   border-bottom-right-radius: 24px !important;
 }
@@ -6442,6 +6460,11 @@ html.overflow-y-hidden {
 }
 
 .v-application .rounded-l-xl {
+  border-top-left-radius: 16px !important;
+  border-bottom-left-radius: 16px !important;
+}
+
+.v-application .rounded-l-xxl {
   border-top-left-radius: 24px !important;
   border-bottom-left-radius: 24px !important;
 }
@@ -6473,6 +6496,10 @@ html.overflow-y-hidden {
 }
 
 .v-application .rounded-tl-xl {
+  border-top-left-radius: 16px !important;
+}
+
+.v-application .rounded-tl-xxl {
   border-top-left-radius: 24px !important;
 }
 
@@ -6501,6 +6528,10 @@ html.overflow-y-hidden {
 }
 
 .v-application .rounded-tr-xl {
+  border-top-right-radius: 16px !important;
+}
+
+.v-application .rounded-tr-xxl {
   border-top-right-radius: 24px !important;
 }
 
@@ -6529,6 +6560,10 @@ html.overflow-y-hidden {
 }
 
 .v-application .rounded-br-xl {
+  border-bottom-right-radius: 16px !important;
+}
+
+.v-application .rounded-br-xxl {
   border-bottom-right-radius: 24px !important;
 }
 
@@ -6557,6 +6592,10 @@ html.overflow-y-hidden {
 }
 
 .v-application .rounded-bl-xl {
+  border-bottom-left-radius: 16px !important;
+}
+
+.v-application .rounded-bl-xxl {
   border-bottom-left-radius: 24px !important;
 }
 
@@ -18450,7 +18489,7 @@ html.overflow-y-hidden {
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
 }
 .v-sheet.v-alert.v-sheet--shaped {
-  border-radius: 24px 4px;
+  border-radius: 16px 4px;
 }
 
 .v-alert {
@@ -19050,10 +19089,10 @@ html.overflow-y-hidden {
   padding-top: 0px;
   margin-bottom: 8px;
 }
-.v-application--is-ltr .v-text-field--reverse input {
+.v-application--is-ltr .v-text-field--reverse input, .v-application--is-ltr .v-text-field--reverse textarea {
   text-align: right;
 }
-.v-application--is-rtl .v-text-field--reverse input {
+.v-application--is-rtl .v-text-field--reverse input, .v-application--is-rtl .v-text-field--reverse textarea {
   text-align: left;
 }
 .v-application--is-ltr .v-text-field--reverse .v-label {
@@ -21123,7 +21162,7 @@ html.overflow-y-hidden {
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
 }
 .v-sheet.v-banner.v-sheet--shaped {
-  border-radius: 24px 0;
+  border-radius: 16px 0;
 }
 
 .v-banner {
@@ -22296,7 +22335,7 @@ html.overflow-y-hidden {
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 .v-sheet.v-card.v-sheet--shaped {
-  border-radius: 24px 4px;
+  border-radius: 16px 4px;
 }
 
 .v-card {
@@ -24424,7 +24463,7 @@ html.overflow-y-hidden {
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
 }
 .v-sheet.v-footer.v-sheet--shaped {
-  border-radius: 24px 0;
+  border-radius: 16px 0;
 }
 
 .v-footer {
@@ -26511,6 +26550,9 @@ html.overflow-y-hidden {
     margin-right: 91.6666666667%;
   }
 }
+.v-item--disabled, .v-item--disabled * {
+  pointer-events: none;
+}
 .theme--light.v-navigation-drawer {
   background-color: #FFFFFF;
 }
@@ -27477,7 +27519,7 @@ html.overflow-y-hidden {
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
 }
 .v-sheet.v-snack__wrapper.v-sheet--shaped {
-  border-radius: 24px 4px;
+  border-radius: 16px 4px;
 }
 
 .v-snack {
@@ -27777,7 +27819,7 @@ html.overflow-y-hidden {
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 .v-sheet.v-stepper.v-sheet--shaped {
-  border-radius: 24px 4px;
+  border-radius: 16px 4px;
 }
 
 .v-stepper {
@@ -28110,6 +28152,9 @@ html.overflow-y-hidden {
 .v-system-bar .v-icon {
   font-size: 1rem;
   margin-right: 4px;
+}
+.v-system-bar .v-btn .v-icon {
+  margin-right: 0;
 }
 .v-system-bar--fixed, .v-system-bar--absolute {
   left: 0;
@@ -28510,6 +28555,12 @@ html.overflow-y-hidden {
 }
 .v-application--is-rtl .v-textarea.v-text-field--enclosed .v-text-field__slot textarea {
   padding-left: 12px;
+}
+.v-application--is-ltr .v-textarea.v-text-field--enclosed.v-text-field--reverse .v-text-field__slot .v-label {
+  margin-right: 12px;
+}
+.v-application--is-rtl .v-textarea.v-text-field--enclosed.v-text-field--reverse .v-text-field__slot .v-label {
+  margin-left: 12px;
 }
 /**
  * * .v-timeline::before - center divider
